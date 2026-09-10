@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pradeep A | Software Developer & Data Science Student Portfolio</title>
+  <style>
+    :root {
+      --bg-primary: #0a0f1d;
+      --bg-secondary: #111a2e;
+      --bg-card: rgba(22, 33, 62, 0.7);
+      --bg-card-hover: rgba(30, 45, 82, 0.9);
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.25);
+      --accent-secondary: #818cf8;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(148, 163, 184, 0.15);
+      --border-focus: #38bdf8;
+      --badge-bg: rgba(56, 189, 248, 0.12);
+      --badge-text: #7dd3fc;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: var(--font-family);
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+    }
+
+    body {
+      line-height: 1.6;
+      overflow-x: hidden;
+      background: radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+                  radial-gradient(circle at 85% 60%, rgba(129, 140, 248, 0.07) 0%, transparent 45%),
+                  var(--bg-primary);
+      min-height: 100vh;
+    }
+
+    /* Navigation Bar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      background: rgba(10, 15, 29, 0.85);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-badge {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: #030712;
+      font-weight: 800;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s, transform 0.2s;
+      padding: 0.4rem 0.2rem;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      font-size: 1.25rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      letter-spacing: -0.5px;
+    }
+
+    .section-title::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 28px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent-secondary));
+      border-radius: 3px;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+      max-width: 680px;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      padding: 4rem 0 3rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      padding: 0.35rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-badge span.dot {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      display: inline-block;
+      box-shadow: 0 0 8px #22c55e;
+    }
+
+    .hero-name {
+      font-size: clamp(2.5rem, 5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #ffffff 40%, #bae6fd 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-tagline {
+      font-size: 1.25rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      line-height: 1.4;
+    }
+
+    .hero-intro {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.6rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #0284c7);
+      color: #041324;
+      box-shadow: 0 4px 18px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--text-muted);
+      transform: translateY(-2px);
+    }
+
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .avatar-card {
+      position: relative;
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      padding: 1.75rem;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      max-width: 360px;
+      text-align: center;
+    }
+
+    .avatar-icon-wrap {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border: 3px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.25rem;
+      font-size: 2.8rem;
+      box-shadow: 0 0 25px var(--accent-glow);
+    }
+
+    .contact-chips {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 1.25rem;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+
+    .chip-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 0.75rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      word-break: break-all;
+    }
+
+    /* Cards & Layouts */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.75rem;
+      transition: all 0.25s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      background: var(--bg-card-hover);
+      transform: translateY(-3px);
+    }
+
+    /* About Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .summary-text {
+      font-size: 1.15rem;
+      color: #e2e8f0;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .strength-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 1rem 1.2rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .strength-icon {
+      color: var(--accent);
+      font-size: 1.2rem;
+      line-height: 1;
+      margin-top: 0.15rem;
+    }
+
+    /* Skills Grid */
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-category-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pill-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .skill-pill {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      color: #f1f5f9;
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .skill-pill:hover {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Featured Project */
+    .project-featured-card {
+      background: linear-gradient(145deg, rgba(17, 26, 46, 0.9), rgba(10, 15, 29, 0.95));
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 18px;
+      padding: 2.25rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-featured-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .project-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: #020617;
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.25rem 0.7rem;
+      border-radius: 4px;
+      margin-bottom: 0.85rem;
+    }
+
+    .project-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+      color: #ffffff;
+    }
+
+    .project-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+
+    .feature-list {
+      list-style: none;
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+
+    .feature-list li::before {
+      content: "✦";
+      color: var(--accent);
+      font-size: 0.9rem;
+      margin-top: 0.15rem;
+    }
+
+    .tech-stack-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .tech-badge {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #bae6fd;
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-family: monospace;
+    }
+
+    /* Education Timeline */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      border-left: 2px solid rgba(56, 189, 248, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 2.25rem;
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: calc(-2rem - 6px);
+      top: 0.3rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .education-school {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.3rem;
+    }
+
+    .education-degree {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .education-meta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .score-badge {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+    }
+
+    /* Resume Section */
+    .resume-box {
+      background: linear-gradient(145deg, #111a2e, #0a0f1d);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .resume-preview-sheet {
+      background: #ffffff;
+      color: #1e293b;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .resume-sheet-header {
+      border-bottom: 2px solid #0284c7;
+      padding-bottom: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .resume-sheet-name {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .resume-sheet-contact {
+      color: #475569;
+      font-size: 0.88rem;
+      margin-top: 0.3rem;
+    }
+
+    .resume-section-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0369a1;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 1.2rem 0 0.5rem;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 0.25rem;
+    }
+
+    /* Contact Form & Info */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2.5rem;
+    }
+
+    .contact-info-card {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-link-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: inherit;
+      padding: 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+
+    .contact-link-item:hover {
+      border-color: var(--accent);
+      transform: translateX(4px);
+    }
+
+    .contact-link-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+
+    .form-control {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border);
+      color: #ffffff;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-status {
+      display: none;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .form-status.success {
+      display: block;
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      background: #060913;
+      border-top: 1px solid var(--border);
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .hero-badge {
+        margin: 0 auto 1.2rem;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(10, 15, 29, 0.98);
+        flex-direction: column;
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        gap: 1rem;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="nav-container">
+      <a href="#home" class="logo">
+        <span class="logo-badge">PA</span>
+        <span>Pradeep A</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- 1. Home / Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <div class="hero-badge">
+            <span class="dot"></span>
+            Available for Internships & Entry-Level Roles
+          </div>
+          <h1 class="hero-name">PRADEEP A</h1>
+          <p class="hero-tagline">Software Developer & Data Science Student</p>
+          <p class="hero-intro">
+            Passionate about leveraging AI and modern technologies to solve real-world problems.
+            Strong fundamentals in Python, C++, and MySQL with hands-on project experience in voice-assisted healthcare solutions.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">⚡ View My Projects</a>
+            <a href="#contact" class="btn btn-secondary">✉ Contact Me</a>
+            <a href="#resume" class="btn btn-secondary">📄 View Resume</a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="avatar-card">
+            <div class="avatar-icon-wrap">👨‍💻</div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 0.25rem;">Pradeep A</h3>
+            <p style="color: var(--accent); font-size: 0.9rem; font-weight: 500;">Salem, Tamil Nadu, India</p>
+            <div class="contact-chips">
+              <div class="chip-item">
+                <span>📧</span>
+                <span>pradeep438072@gmail.com</span>
+              </div>
+              <div class="chip-item">
+                <span>📱</span>
+                <span>+91 8072637400</span>
+              </div>
+              <div class="chip-item">
+                <span>🎓</span>
+                <span>Sona College of Arts and Science</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. About Me Section -->
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">Professional profile and personal qualities from my verified resume</p>
+
+      <div class="about-content">
+        <div class="card">
+          <p class="summary-text">
+            "Enthusiastic and motivated Software Developer & Data Science student with strong fundamentals in Python, C++, and MySQL database management. Passionate about leveraging AI and modern technologies to solve real-world problems, as demonstrated by hands-on project experience in voice-assisted healthcare solutions."
+          </p>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Currently pursuing my Bachelor's Degree at Sona College of Arts and Science, Salem. Motivated to contribute effectively in an entry-level software development or data engineering role where I can build reliable solutions and grow rapidly with the engineering team.
+          </p>
+        </div>
+
+        <h3 style="font-size: 1.2rem; margin-top: 1rem; color: #bae6fd;">Strengths & Personal Qualities</h3>
+        <div class="strengths-grid">
+          <div class="strength-item">
+            <span class="strength-icon">✔</span>
+            <div>
+              <strong>Problem-Solving Mindset</strong>
+              <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.2rem;">Strong analytical thinking and systematic approach to algorithmic problem-solving.</p>
+            </div>
+          </div>
+          <div class="strength-item">
+            <span class="strength-icon">✔</span>
+            <div>
+              <strong>Quick Learner</strong>
+              <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.2rem;">Eager to master new software frameworks, AI libraries, and engineering tools.</p>
+            </div>
+          </div>
+          <div class="strength-item">
+            <span class="strength-icon">✔</span>
+            <div>
+              <strong>Team & Execution Skills</strong>
+              <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0.2rem;">Effective team communication, collaborative mindset, and disciplined project delivery.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Skills Section -->
+    <section id="skills">
+      <h2 class="section-title">Technical Skills</h2>
+      <p class="section-subtitle">Core technical competencies and tools verified directly from my resume</p>
+
+      <div class="skills-container">
+        <!-- Programming Languages -->
+        <div class="card">
+          <h3 class="skill-category-title">
+            <span>💻</span> Programming Languages
+          </h3>
+          <div class="pill-cloud">
+            <span class="skill-pill">Python</span>
+            <span class="skill-pill">C++</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
+            Primary languages for algorithmic problem solving, scripting, and backend system implementation.
+          </p>
+        </div>
+
+        <!-- Databases -->
+        <div class="card">
+          <h3 class="skill-category-title">
+            <span>🗄️</span> Database
+          </h3>
+          <div class="pill-cloud">
+            <span class="skill-pill">MySQL</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
+            Structured database design, query optimization, schema operations, and relational data management.
+          </p>
+        </div>
+
+        <!-- Tools & Technologies -->
+        <div class="card">
+          <h3 class="skill-category-title">
+            <span>🛠️</span> Tools & Technologies
+          </h3>
+          <div class="pill-cloud">
+            <span class="skill-pill">Git</span>
+            <span class="skill-pill">Microsoft Excel</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
+            Version control, collaborative code management, and structured data handling/analysis.
+          </p>
+        </div>
+
+        <!-- Core Concepts -->
+        <div class="card">
+          <h3 class="skill-category-title">
+            <span>🧠</span> Core Computer Science Concepts
+          </h3>
+          <div class="pill-cloud">
+            <span class="skill-pill">Data Structures</span>
+            <span class="skill-pill">Object-Oriented Programming (OOP)</span>
+            <span class="skill-pill">AI Integration</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
+            Foundation in system architecture, algorithmic efficiency, and integration of intelligent AI models.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Projects & Experience Section -->
+    <section id="projects">
+      <h2 class="section-title">Key Projects & Practical Experience</h2>
+      <p class="section-subtitle">Real-world software engineering and AI healthcare solutions</p>
+
+      <!-- Featured Project -->
+      <div class="project-featured-card">
+        <span class="project-tag">Featured Key Project</span>
+        <h3 class="project-title">MediVoice AI – Medicine Reminder & Voice Assistant</h3>
+        <p class="project-desc">
+          Designed and developed an AI-powered voice assistant application created to assist users with medication schedules and smart audio reminders.
+        </p>
+
+        <h4 style="color: #bae6fd; font-size: 1rem; margin-bottom: 0.75rem;">Key Architecture & Features:</h4>
+        <ul class="feature-list">
+          <li>
+            <span><strong>Voice Interaction Pipelines:</strong> Implemented voice interaction pipelines to capture user inputs, schedule automated dosage alerts, and convey medicine details effortlessly.</span>
+          </li>
+          <li>
+            <span><strong>Automated Dosage Alerts:</strong> Engineered schedule triggers for accurate timing and timely audio delivery for patient prescription adherence.</span>
+          </li>
+          <li>
+            <span><strong>Structured Database Operations:</strong> Utilized structured database operations for secure and accurate user profile and prescription management.</span>
+          </li>
+        </ul>
+
+        <div class="tech-stack-row">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">AI Integration</span>
+          <span class="tech-badge">MySQL</span>
+          <span class="tech-badge">Voice Pipeline</span>
+          <span class="tech-badge">Prescription DB</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Education & Academic Distinctions -->
+    <section id="education">
+      <h2 class="section-title">Education & Academic Record</h2>
+      <p class="section-subtitle">Formal academic background and scholastic distinctions</p>
+
+      <div class="timeline">
+        <!-- College -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <h3 class="education-school">Sona College of Arts and Science</h3>
+            <div class="education-degree">Bachelor's Degree</div>
+            <div class="education-meta">
+              <span>📍 Salem, India</span>
+              <span>•</span>
+              <span style="color: var(--accent);">Status: Pursuing</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.92rem;">
+              Focusing on Software Development, Data Science, Data Structures, Object-Oriented Programming, and Database Systems.
+            </p>
+          </div>
+        </div>
+
+        <!-- Higher Secondary -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <h3 class="education-school">Sri Gayathiri Matriculation Higher Secondary School</h3>
+            <div class="education-degree">Higher Secondary Certificate (12th Standard)</div>
+            <div class="education-meta">
+              <span>📍 Salem, India</span>
+              <span>•</span>
+              <span class="score-badge">Score: 83.5% Distinction</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.92rem;">
+              Strong foundation in Mathematics and Sciences leading to distinction academic achievement.
+            </p>
+          </div>
+        </div>
+
+        <!-- Secondary School -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="card">
+            <h3 class="education-school">Sri Gayathiri Matriculation Higher Secondary School</h3>
+            <div class="education-degree">Secondary School Leaving Certificate (10th Standard)</div>
+            <div class="education-meta">
+              <span>📍 Salem, India</span>
+              <span>•</span>
+              <span class="score-badge">Score: 84.4% Distinction</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.92rem;">
+              Outstanding academic performance across secondary subjects with high merit score.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Original Resume Section -->
+    <section id="resume">
+      <h2 class="section-title">Resume</h2>
+      <p class="section-subtitle">Verified curriculum vitae and credential summary</p>
+
+      <div class="resume-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h3 style="font-size: 1.25rem; font-weight: 700;">Original Resume Document</h3>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Pradeep A • Salem, Tamil Nadu • pradeep438072@gmail.com</p>
+          </div>
+          <div style="display: flex; gap: 0.75rem;">
+            <button class="btn btn-primary" id="downloadResumeBtn">📥 Download / Save Resume</button>
+            <button class="btn btn-secondary" id="copyResumeBtn">📋 Copy Plaintext</button>
+          </div>
+        </div>
+
+        <!-- Exact Resume Replica Sheet -->
+        <div class="resume-preview-sheet" id="resumeTextContent">
+          <div class="resume-sheet-header">
+            <div class="resume-sheet-name">PRADEEP A</div>
+            <div class="resume-sheet-contact">
+              Salem, Tamil Nadu &nbsp;•&nbsp; +91 8072637400 &nbsp;•&nbsp; pradeep438072@gmail.com
+            </div>
+          </div>
+
+          <div class="resume-section-title">PROFESSIONAL SUMMARY</div>
+          <p>
+            Enthusiastic and motivated Software Developer &amp; Data Science student with strong fundamentals in Python, C++, and MySQL database management. Passionate about leveraging AI and modern technologies to solve real-world problems, as demonstrated by hands-on project experience in voice-assisted healthcare solutions.
+          </p>
+
+          <div class="resume-section-title">TECHNICAL SKILLS</div>
+          <p><strong>Programming Languages:</strong> Python, C++</p>
+          <p><strong>Database &amp; Tools:</strong> MySQL, Microsoft Excel, Git</p>
+          <p><strong>Core Concepts:</strong> Data Structures, Object-Oriented Programming (OOP), AI Integration</p>
+
+          <div class="resume-section-title">KEY PROJECTS</div>
+          <p style="font-weight: bold; margin-bottom: 0.25rem;">MediVoice AI – Medicine Reminder &amp; Voice Assistant</p>
+          <ul style="padding-left: 1.25rem; margin-bottom: 0.5rem;">
+            <li>Designed and developed an AI-powered voice assistant application created to assist users with medication schedules and smart audio reminders.</li>
+            <li>Implemented voice interaction pipelines to capture user inputs, schedule automated dosage alerts, and convey medicine details effortlessly.</li>
+            <li>Utilized structured database operations for secure and accurate user profile and prescription management.</li>
+          </ul>
+
+          <div class="resume-section-title">EDUCATION</div>
+          <p style="margin-bottom: 0.25rem;">
+            <strong>Sona College of Arts and Science</strong>, Salem, India<br />
+            Bachelor's Degree (Pursuing)
+          </p>
+          <p style="margin-top: 0.4rem;">
+            <strong>Sri Gayathiri Matriculation Higher Secondary School</strong>, Salem, India<br />
+            Higher Secondary Certificate (12th Standard) — Score: <strong>83.5%</strong><br />
+            Secondary School Leaving Certificate (10th Standard) — Score: <strong>84.4%</strong>
+          </p>
+
+          <div class="resume-section-title">STRENGTHS &amp; PERSONAL QUALITIES</div>
+          <ul style="padding-left: 1.25rem;">
+            <li>Strong problem-solving mindset and logical thinking ability.</li>
+            <li>Eager to learn new tools, technologies, and software frameworks quickly.</li>
+            <li>Effective team communication and project execution skills.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Contact Section -->
+    <section id="contact">
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="section-subtitle">Reach out for internships, project inquiries, or entry-level opportunities</p>
+
+      <div class="contact-grid">
+        <!-- Direct Contact Details -->
+        <div class="contact-info-card">
+          <a href="mailto:pradeep438072@gmail.com" class="contact-link-item">
+            <div class="contact-link-icon">✉</div>
+            <div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Email Address</div>
+              <div style="font-weight: 600; color: #ffffff;">pradeep438072@gmail.com</div>
+            </div>
+          </a>
+
+          <a href="tel:+918072637400" class="contact-link-item">
+            <div class="contact-link-icon">📞</div>
+            <div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Phone / WhatsApp</div>
+              <div style="font-weight: 600; color: #ffffff;">+91 8072637400</div>
+            </div>
+          </a>
+
+          <div class="contact-link-item">
+            <div class="contact-link-icon">📍</div>
+            <div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Current Location</div>
+              <div style="font-weight: 600; color: #ffffff;">Salem, Tamil Nadu, India</div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: auto;">
+            <h4 style="color: var(--accent); margin-bottom: 0.4rem; font-size: 0.95rem;">Availability Notice</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">
+              Actively seeking software developer and data science internships. Quick response guaranteed within 24 hours.
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label for="senderName">Your Name</label>
+            <input type="text" id="senderName" class="form-control" placeholder="e.g. John Doe" required />
+          </div>
+
+          <div class="form-group">
+            <label for="senderEmail">Your Email</label>
+            <input type="email" id="senderEmail" class="form-control" placeholder="e.g. john@example.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="senderSubject">Subject</label>
+            <input type="text" id="senderSubject" class="form-control" placeholder="e.g. Software Developer Internship Opportunity" required />
+          </div>
+
+          <div class="form-group">
+            <label for="senderMessage">Message</label>
+            <textarea id="senderMessage" class="form-control" placeholder="Write your message here..." required></textarea>
+          </div>
+
+          <div id="formStatus" class="form-status"></div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            🚀 Send Message to Pradeep
+          </button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <div class="logo">
+        <span class="logo-badge">PA</span>
+        <span>Pradeep A</span>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">
+        Software Developer &amp; Data Science Student • Salem, Tamil Nadu, India
+      </p>
+      <ul class="footer-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <p style="font-size: 0.8rem; color: #475569; margin-top: 0.5rem;">
+        © <span id="currentYear"></span> Pradeep A. Built based on verified resume data.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+
+    // Close menu on link click
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('show');
+      });
+    });
+
+    // Active link highlighting on scroll
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section');
+      const scrollPos = window.scrollY + 200;
+
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        const id = section.getAttribute('id');
+        if (scrollPos >= top && scrollPos < top + height) {
+          document.querySelectorAll('.nav-links a').forEach(a => {
+            a.classList.remove('active');
+            if (a.getAttribute('href') === `#${id}`) {
+              a.classList.add('active');
+            }
+          });
+        }
+      });
+    });
+
+    // Contact Form handling
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('senderName').value.trim();
+      const email = document.getElementById('senderEmail').value.trim();
+      const subject = document.getElementById('senderSubject').value.trim();
+      const message = document.getElementById('senderMessage').value.trim();
+
+      if (!name || !email || !subject || !message) {
+        alert('Please fill out all fields.');
+        return;
+      }
+
+      formStatus.className = 'form-status success';
+      formStatus.textContent = `Thank you, ${name}! Your message has been prepared. Opening your email app to send to pradeep438072@gmail.com...`;
+
+      // Open mailto link
+      const mailtoUrl = `mailto:pradeep438072@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("From: " + name + " (" + email + ")\n\n" + message)}`;
+      window.location.href = mailtoUrl;
+
+      // Reset form
+      contactForm.reset();
+    });
+
+    // Resume Download/Export
+    document.getElementById('downloadResumeBtn').addEventListener('click', () => {
+      const resumeContent = document.getElementById('resumeTextContent').innerText;
+      const blob = new Blob([resumeContent], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Pradeep_A_Resume.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    // Copy Resume to Clipboard
+    document.getElementById('copyResumeBtn').addEventListener('click', () => {
+      const resumeContent = document.getElementById('resumeTextContent').innerText;
+      navigator.clipboard.writeText(resumeContent).then(() => {
+        alert('Resume text copied to clipboard!');
+      }).catch(() => {
+        alert('Could not copy to clipboard. Please select and copy manually.');
+      });
+    });
+  </script>
+</body>
+</html>
