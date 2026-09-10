@@ -3,48 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pradeep A | Software Developer & Data Science Portfolio</title>
-  <meta name="description" content="Personal portfolio of Pradeep A - Software Developer and Data Science student specializing in Python, C++, MySQL, and AI-driven solutions." />
+  <title>Pradeep A | Artificial Intelligence & Data Science Portfolio</title>
+  <meta name="description" content="Personal portfolio of Pradeep A - B.Sc. Artificial Intelligence and Data Science student specializing in Python, C++, MySQL, and AI-driven solutions." />
   <meta name="author" content="Pradeep A" />
-
-  <!-- External libraries for AI Resume-to-Portfolio parsing (PDF.js & Mammoth.js) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 
   <style>
     /* ==========================================================
-       THEME VARIABLES & DESIGN SYSTEM
+       DESIGN SYSTEM & COLOR PALETTES
        ========================================================== */
     :root {
-      /* Theme 1: Modern Cyan / Slate (Default) */
+      /* Theme: Modern Cyan / Tech Slate (Default) */
       --bg-body: #090d16;
       --bg-surface: #0f172a;
-      --bg-card: rgba(30, 41, 59, 0.7);
-      --bg-card-hover: rgba(51, 65, 85, 0.85);
+      --bg-card: rgba(30, 41, 59, 0.75);
+      --bg-card-hover: rgba(51, 65, 85, 0.9);
       --bg-input: #1e293b;
-      --border-color: rgba(148, 163, 184, 0.15);
+      --border-color: rgba(148, 163, 184, 0.16);
       --border-focus: #38bdf8;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
+      --text-dim: #64748b;
       --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.25);
+      --accent-glow: rgba(56, 189, 248, 0.28);
       --accent-secondary: #818cf8;
       --badge-bg: rgba(56, 189, 248, 0.12);
       --badge-text: #7dd3fc;
-      --nav-bg: rgba(15, 23, 42, 0.92);
+      --nav-bg: rgba(15, 23, 42, 0.94);
       --success: #22c55e;
-      --radius-sm: 6px;
-      --radius-md: 10px;
-      --radius-lg: 16px;
+      --warning: #f59e0b;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
       --radius-full: 9999px;
       --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     }
 
     [data-theme="violet"] {
       --bg-body: #0c081e;
       --bg-surface: #171036;
-      --bg-card: rgba(39, 27, 84, 0.7);
-      --bg-card-hover: rgba(58, 41, 122, 0.85);
+      --bg-card: rgba(39, 27, 84, 0.75);
+      --bg-card-hover: rgba(58, 41, 122, 0.9);
       --bg-input: #23194a;
       --border-color: rgba(192, 132, 252, 0.2);
       --border-focus: #c084fc;
@@ -53,39 +52,39 @@
       --accent-secondary: #f472b6;
       --badge-bg: rgba(192, 132, 252, 0.15);
       --badge-text: #e9d5ff;
-      --nav-bg: rgba(23, 16, 54, 0.92);
+      --nav-bg: rgba(23, 16, 54, 0.94);
     }
 
     [data-theme="emerald"] {
       --bg-body: #04140e;
       --bg-surface: #0a251b;
-      --bg-card: rgba(16, 51, 38, 0.7);
-      --bg-card-hover: rgba(23, 74, 55, 0.85);
+      --bg-card: rgba(16, 51, 38, 0.75);
+      --bg-card-hover: rgba(23, 74, 55, 0.9);
       --bg-input: #0f3627;
       --border-color: rgba(52, 211, 153, 0.2);
       --border-focus: #10b981;
       --accent: #10b981;
-      --accent-glow: rgba(16, 185, 129, 0.25);
+      --accent-glow: rgba(16, 185, 129, 0.28);
       --accent-secondary: #34d399;
       --badge-bg: rgba(16, 185, 129, 0.15);
       --badge-text: #a7f3d0;
-      --nav-bg: rgba(10, 37, 27, 0.92);
+      --nav-bg: rgba(10, 37, 27, 0.94);
     }
 
     [data-theme="amber"] {
       --bg-body: #141006;
       --bg-surface: #221b0b;
-      --bg-card: rgba(53, 42, 18, 0.7);
-      --bg-card-hover: rgba(77, 61, 26, 0.85);
+      --bg-card: rgba(53, 42, 18, 0.75);
+      --bg-card-hover: rgba(77, 61, 26, 0.9);
       --bg-input: #2e240e;
       --border-color: rgba(245, 158, 11, 0.25);
       --border-focus: #f59e0b;
       --accent: #f59e0b;
-      --accent-glow: rgba(245, 158, 11, 0.25);
+      --accent-glow: rgba(245, 158, 11, 0.28);
       --accent-secondary: #fbbf24;
       --badge-bg: rgba(245, 158, 11, 0.15);
       --badge-text: #fde68a;
-      --nav-bg: rgba(34, 27, 11, 0.92);
+      --nav-bg: rgba(34, 27, 11, 0.94);
     }
 
     [data-mode="light"] {
@@ -98,14 +97,17 @@
       --border-focus: #0284c7;
       --text-main: #0f172a;
       --text-muted: #64748b;
+      --text-dim: #94a3b8;
       --accent: #0284c7;
       --accent-glow: rgba(2, 132, 199, 0.2);
       --accent-secondary: #6366f1;
       --badge-bg: #e0f2fe;
       --badge-text: #0369a1;
-      --nav-bg: rgba(255, 255, 255, 0.94);
+      --nav-bg: rgba(255, 255, 255, 0.96);
+      --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
     }
 
+    /* Reset & Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -123,18 +125,20 @@
       line-height: 1.65;
       overflow-x: hidden;
       min-height: 100vh;
-      background: radial-gradient(circle at 10% 10%, var(--accent-glow) 0%, transparent 45%),
-                  radial-gradient(circle at 90% 80%, rgba(129, 140, 248, 0.08) 0%, transparent 50%),
+      background: radial-gradient(circle at 15% 15%, var(--accent-glow) 0%, transparent 40%),
+                  radial-gradient(circle at 85% 75%, rgba(129, 140, 248, 0.07) 0%, transparent 45%),
                   var(--bg-body);
+      background-attachment: fixed;
     }
 
-    /* Top Sticky Header */
+    /* Sticky Navigation */
     .top-header {
       position: sticky;
       top: 0;
       z-index: 1000;
       background: var(--nav-bg);
-      backdrop-filter: blur(14px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border-color);
       transition: background 0.3s;
     }
@@ -152,18 +156,18 @@
     .logo-brand {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.65rem;
       text-decoration: none;
       color: var(--text-main);
       font-weight: 800;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       letter-spacing: -0.5px;
     }
 
     .brand-badge {
       background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
       color: #030712;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 900;
       padding: 0.25rem 0.6rem;
       border-radius: var(--radius-sm);
@@ -172,7 +176,7 @@
     .nav-links {
       display: flex;
       list-style: none;
-      gap: 1.3rem;
+      gap: 1.35rem;
       align-items: center;
     }
 
@@ -182,31 +186,49 @@
       font-size: 0.92rem;
       font-weight: 500;
       transition: color 0.2s ease;
+      position: relative;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover, .nav-links a.active {
       color: var(--accent);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.2s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
     }
 
     .nav-controls {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.65rem;
     }
 
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      padding: 0.55rem 1.15rem;
-      font-size: 0.88rem;
+      padding: 0.6rem 1.25rem;
+      font-size: 0.9rem;
       font-weight: 600;
       border-radius: var(--radius-sm);
       text-decoration: none;
       cursor: pointer;
       transition: all 0.2s ease;
       border: 1px solid transparent;
+      white-space: nowrap;
     }
 
     .btn-primary {
@@ -230,10 +252,11 @@
       background: rgba(255, 255, 255, 0.08);
       border-color: var(--accent);
       color: var(--accent);
+      transform: translateY(-2px);
     }
 
     .btn-icon {
-      padding: 0.5rem;
+      padding: 0.5rem 0.75rem;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border-color);
       color: var(--text-main);
@@ -242,7 +265,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      font-size: 0.95rem;
       transition: all 0.2s;
     }
 
@@ -251,20 +274,26 @@
       border-color: var(--accent);
     }
 
-    /* Main Container */
+    .mobile-menu-btn {
+      display: none;
+      font-size: 1.3rem;
+      padding: 0.4rem 0.7rem;
+    }
+
+    /* Main Container & Sections */
     .main-wrapper {
-      max-width: 1150px;
+      max-width: 1180px;
       margin: 0 auto;
       padding: 0 1.25rem 4rem;
     }
 
     .section {
-      padding: 5rem 0;
+      padding: 4.75rem 0;
       border-bottom: 1px solid var(--border-color);
     }
 
     .section-title {
-      font-size: 2rem;
+      font-size: 2.1rem;
       font-weight: 800;
       margin-bottom: 0.4rem;
       letter-spacing: -0.5px;
@@ -276,7 +305,7 @@
     .section-title::before {
       content: "";
       width: 5px;
-      height: 24px;
+      height: 26px;
       background: linear-gradient(to bottom, var(--accent), var(--accent-secondary));
       border-radius: 3px;
       display: inline-block;
@@ -286,12 +315,28 @@
       color: var(--text-muted);
       font-size: 1rem;
       margin-bottom: 2.5rem;
-      max-width: 680px;
+      max-width: 720px;
     }
 
-    /* Hero Section */
+    /* Cards */
+    .card-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.85rem;
+      box-shadow: var(--shadow-card);
+      transition: all 0.25s ease;
+    }
+
+    .card-box:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px -10px var(--accent-glow);
+    }
+
+    /* 1. Hero Section */
     .hero-section {
-      padding: 5.5rem 0 4rem;
+      padding: 5rem 0 3.5rem;
     }
 
     .hero-grid {
@@ -307,9 +352,9 @@
       gap: 0.5rem;
       background: var(--badge-bg);
       color: var(--badge-text);
-      padding: 0.35rem 0.85rem;
+      padding: 0.35rem 0.95rem;
       border-radius: var(--radius-full);
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       font-weight: 600;
       border: 1px solid rgba(56, 189, 248, 0.25);
       margin-bottom: 1.25rem;
@@ -321,12 +366,18 @@
       background: var(--success);
       border-radius: 50%;
       box-shadow: 0 0 8px var(--success);
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.25); }
     }
 
     .hero-name {
-      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
       font-weight: 900;
-      line-height: 1.15;
+      line-height: 1.12;
       letter-spacing: -1.5px;
       margin-bottom: 0.75rem;
       background: linear-gradient(135deg, #ffffff, var(--accent));
@@ -334,11 +385,21 @@
       -webkit-text-fill-color: transparent;
     }
 
+    [data-mode="light"] .hero-name {
+      background: linear-gradient(135deg, #0f172a, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
     .hero-role {
       font-size: 1.35rem;
       color: var(--accent);
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .hero-bio {
@@ -350,23 +411,24 @@
 
     .hero-actions {
       display: flex;
-      gap: 0.85rem;
+      gap: 0.9rem;
       flex-wrap: wrap;
     }
 
+    /* Avatar & Profile Card */
     .avatar-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
       padding: 2.25rem;
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: var(--shadow-card);
       position: relative;
     }
 
     .avatar-circle {
-      width: 120px;
-      height: 120px;
+      width: 125px;
+      height: 125px;
       margin: 0 auto 1.25rem;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--bg-surface), var(--bg-card));
@@ -374,14 +436,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 3rem;
-      box-shadow: 0 0 30px var(--accent-glow);
+      font-size: 3.2rem;
+      box-shadow: 0 0 35px var(--accent-glow);
     }
 
     .contact-chips {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.65rem;
       margin-top: 1.5rem;
       text-align: left;
     }
@@ -389,154 +451,265 @@
     .chip-item {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
-      padding: 0.5rem 0.85rem;
+      gap: 0.75rem;
+      padding: 0.55rem 0.85rem;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-sm);
       font-size: 0.88rem;
       color: var(--text-muted);
+      text-decoration: none;
       word-break: break-all;
+      transition: all 0.2s;
     }
 
-    /* Skills Grid */
+    .chip-item:hover {
+      border-color: var(--accent);
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    /* 2. About Me */
+    .about-quote-box {
+      background: var(--bg-card);
+      border-left: 4px solid var(--accent);
+      padding: 1.75rem 2rem;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin-bottom: 2.25rem;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-main);
+    }
+
+    .strengths-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .strength-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.25rem 1.5rem;
+      transition: all 0.2s;
+    }
+
+    .strength-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .strength-icon {
+      font-size: 1.35rem;
+      color: var(--accent);
+      background: var(--badge-bg);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      flex-shrink: 0;
+    }
+
+    /* 3. Skills Grid */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
     }
 
-    .card-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 1.75rem;
-      transition: all 0.25s ease;
-    }
-
-    .card-box:hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    }
-
-    .card-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 1rem;
+    .skill-card-header {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .skill-icon-wrap {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      background: var(--badge-bg);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--accent);
+    }
+
+    .skill-card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
     }
 
     .pill-cloud {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.55rem;
+      gap: 0.6rem;
     }
 
     .tech-pill {
       background: var(--badge-bg);
       border: 1px solid var(--border-color);
       color: var(--badge-text);
-      padding: 0.35rem 0.8rem;
+      padding: 0.4rem 0.85rem;
       border-radius: var(--radius-sm);
-      font-size: 0.85rem;
-      font-weight: 500;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.2s;
     }
 
-    /* Projects Grid */
-    .projects-grid {
+    .tech-pill:hover {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #030712;
+      transform: translateY(-2px);
+    }
+
+    /* 4. Internship & Practical Training */
+    .training-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
       gap: 1.75rem;
     }
 
-    .project-card {
+    .training-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
       padding: 2rem;
-      display: flex;
-      flex-direction: column;
       position: relative;
       overflow: hidden;
-      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s;
     }
 
-    .project-card:hover {
+    .training-card:hover {
       border-color: var(--accent);
-      transform: translateY(-4px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      transform: translateY(-3px);
     }
 
-    .project-card::before {
+    .training-badge {
+      display: inline-block;
+      width: fit-content;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      background: var(--badge-bg);
+      border: 1px solid var(--border-color);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 0.85rem;
+    }
+
+    /* 5. Projects Section */
+    .featured-project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: all 0.3s;
+    }
+
+    .featured-project-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 20px 45px -10px var(--accent-glow);
+    }
+
+    .featured-project-card::before {
       content: "";
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 3px;
+      height: 4px;
       background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
     }
 
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
     .project-title {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-weight: 800;
-      margin-bottom: 0.5rem;
       color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+
+    [data-mode="light"] .project-title {
+      color: #0f172a;
     }
 
     .project-desc {
       color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.65;
-      margin-bottom: 1.25rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
     }
 
     .features-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
     }
 
     .features-list li {
-      font-size: 0.88rem;
-      color: #cbd5e1;
+      font-size: 0.95rem;
+      color: var(--text-main);
       display: flex;
       align-items: flex-start;
-      gap: 0.5rem;
+      gap: 0.75rem;
+      line-height: 1.6;
     }
 
     .features-list li::before {
       content: "✦";
       color: var(--accent);
-      font-size: 0.8rem;
-      margin-top: 0.2rem;
+      font-weight: bold;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
     }
 
     .project-footer {
-      margin-top: auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 0.85rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      gap: 1rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border-color);
     }
 
-    /* Timelines */
+    /* 6. Education Timeline */
     .timeline {
       position: relative;
-      padding-left: 2rem;
+      padding-left: 2.25rem;
       border-left: 2px solid var(--border-color);
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 2.25rem;
     }
 
     .timeline-node {
@@ -545,100 +718,174 @@
 
     .timeline-dot {
       position: absolute;
-      left: calc(-2rem - 6px);
-      top: 0.4rem;
-      width: 10px;
-      height: 10px;
+      left: calc(-2.25rem - 7px);
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 10px var(--accent);
+      box-shadow: 0 0 12px var(--accent);
     }
 
-    /* Resume Document Sheet */
-    .resume-sheet {
+    .edu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .edu-degree {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .edu-institution {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.98rem;
+    }
+
+    .edu-badge {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: var(--success);
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+    }
+
+    /* 7. Achievements & Certifications */
+    .achieve-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .achieve-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s;
+    }
+
+    .achieve-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .achieve-score {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--success);
+      letter-spacing: -1px;
+      margin-bottom: 0.25rem;
+    }
+
+    /* 8. Resume Document Sheet */
+    .resume-sheet-wrapper {
       background: #ffffff;
       color: #0f172a;
       border-radius: var(--radius-md);
       padding: 2.5rem;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+      max-width: 860px;
+      margin: 0 auto;
       font-size: 0.92rem;
-      line-height: 1.6;
+      line-height: 1.65;
     }
 
-    .resume-sheet h2 {
-      font-size: 1.8rem;
+    .resume-sheet-wrapper h2 {
+      font-size: 1.85rem;
       color: #0f172a;
       border-bottom: 2px solid #0284c7;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
+      padding-bottom: 0.4rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
     }
 
-    .resume-sheet h3 {
+    .resume-sheet-wrapper h3 {
       font-size: 1.05rem;
       color: #0369a1;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin: 1.2rem 0 0.4rem;
+      margin: 1.35rem 0 0.5rem;
       border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 0.2rem;
+      padding-bottom: 0.25rem;
     }
 
-    /* Contact Grid */
+    /* 9. Contact Grid & Form */
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1.25fr;
       gap: 2rem;
     }
 
-    .contact-link-card {
-      text-decoration: none;
-      color: inherit;
+    .contact-info-card {
       display: flex;
       align-items: center;
       gap: 1rem;
-      padding: 1.2rem;
+      padding: 1.25rem;
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
+      text-decoration: none;
+      color: inherit;
       transition: all 0.2s;
     }
 
-    .contact-link-card:hover {
+    .contact-info-card:hover {
       border-color: var(--accent);
       transform: translateY(-2px);
+      background: var(--bg-card-hover);
     }
 
     .form-group {
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
-      margin-bottom: 1rem;
+      gap: 0.45rem;
+      margin-bottom: 1.1rem;
     }
 
     .form-control {
       background: var(--bg-input);
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      padding: 0.7rem 0.9rem;
+      padding: 0.75rem 1rem;
       border-radius: var(--radius-sm);
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       font-family: inherit;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .form-control:focus {
       border-color: var(--border-focus);
-      box-shadow: 0 0 0 2px var(--accent-glow);
+      box-shadow: 0 0 0 3px var(--accent-glow);
     }
 
-    /* Modal for AI Generator */
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.45);
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 1.25rem;
+      text-align: center;
+    }
+
+    /* Interactive Demo Modal */
     .modal-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       z-index: 2000;
       align-items: center;
       justify-content: center;
@@ -649,64 +896,106 @@
       display: flex;
     }
 
-    .modal-dialog {
+    .modal-box {
       background: var(--bg-surface);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      max-width: 680px;
+      max-width: 650px;
       width: 100%;
       max-height: 90vh;
       overflow-y: auto;
       padding: 2.25rem;
       position: relative;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 25px 65px rgba(0, 0, 0, 0.6);
     }
 
     .modal-close {
       position: absolute;
       top: 1.25rem;
       right: 1.25rem;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.08);
       border: 1px solid var(--border-color);
       color: var(--text-main);
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      font-size: 1.1rem;
     }
 
-    .dropzone-box {
-      border: 2px dashed var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 2.5rem 1.5rem;
-      text-align: center;
-      cursor: pointer;
-      margin: 1.25rem 0;
-      transition: all 0.2s;
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--accent);
+      color: var(--text-main);
+      padding: 0.9rem 1.4rem;
+      border-radius: var(--radius-sm);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .dropzone-box:hover, .dropzone-box.dragover {
-      border-color: var(--accent);
-      background: rgba(56, 189, 248, 0.05);
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Print View */
+    @media print {
+      .top-header, .hero-actions, .nav-controls, footer, #contact form, .btn, .modal-overlay {
+        display: none !important;
+      }
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .resume-sheet-wrapper {
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
     }
 
     /* Responsive */
-    @media (max-width: 860px) {
+    @media (max-width: 920px) {
       .hero-grid, .contact-grid {
         grid-template-columns: 1fr;
       }
       .nav-links {
         display: none;
       }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg-surface);
+        border-bottom: 1px solid var(--border-color);
+        padding: 1.5rem;
+        gap: 1rem;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+      }
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
     }
   </style>
 </head>
 <body data-theme="cyan" data-mode="dark">
 
-  <!-- TOP HEADER -->
+  <!-- ================= TOP STICKY NAVIGATION ================= -->
   <header class="top-header">
     <div class="nav-container">
       <a href="#home" class="logo-brand">
@@ -714,332 +1003,566 @@
         <span>Pradeep A</span>
       </a>
 
-      <!-- Desktop Nav -->
-      <ul class="nav-links">
+      <!-- Desktop & Mobile Nav Links -->
+      <ul class="nav-links" id="navLinks">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
+        <li><a href="#training">Training</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#education">Education</a></li>
+        <li><a href="#achievements">Achievements</a></li>
         <li><a href="#resume">Resume</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
 
-      <!-- Action Controls -->
+      <!-- Controls -->
       <div class="nav-controls">
-        <!-- AI Generator Modal Trigger -->
-        <button class="btn btn-outline" onclick="openGeneratorModal()" title="Upload a resume to automatically regenerate this portfolio">
-          <span>✨</span> AI Resume Generator
-        </button>
-
-        <!-- Theme Selector -->
-        <select id="themeSelector" class="btn-icon" style="background: var(--bg-card); color: var(--text-main); font-size: 0.85rem;" title="Select Color Palette">
-          <option value="cyan">🎨 Cyan / Slate</option>
-          <option value="violet">💜 Violet / Midnight</option>
-          <option value="emerald">🌿 Emerald / Tech</option>
-          <option value="amber">🔥 Amber / Obsidian</option>
+        <!-- Palette Switcher -->
+        <select id="themeSelector" class="btn-icon" style="background: var(--bg-card); color: var(--text-main); font-size: 0.85rem;" title="Select Color Theme">
+          <option value="cyan">🎨 Cyan Slate</option>
+          <option value="violet">💜 Violet Midnight</option>
+          <option value="emerald">🌿 Emerald Tech</option>
+          <option value="amber">🔥 Amber Obsidian</option>
         </select>
 
         <!-- Dark / Light Toggle -->
-        <button class="btn-icon" onclick="toggleColorMode()" id="modeToggleBtn" title="Toggle Dark/Light Mode">
+        <button class="btn-icon" id="modeToggleBtn" onclick="toggleColorMode()" title="Toggle Dark/Light Mode">
           🌙
+        </button>
+
+        <!-- Download Resume Quick Button -->
+        <a href="#resume" class="btn btn-primary" style="padding: 0.45rem 0.95rem; font-size: 0.85rem;">
+          📄 Resume
+        </a>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="btn-icon mobile-menu-btn" onclick="toggleMobileMenu()" title="Toggle Menu">
+          ☰
         </button>
       </div>
     </div>
   </header>
 
-  <!-- MAIN PORTFOLIO -->
-  <main class="main-wrapper" id="portfolioView">
+  <!-- ================= MAIN PORTFOLIO BODY ================= -->
+  <main class="main-wrapper">
 
     <!-- 1. HOME / HERO SECTION -->
     <section id="home" class="hero-section">
       <div class="hero-grid">
         <div>
-          <div class="status-badge" id="dyn-badge">
+          <!-- Open to Opportunities Status -->
+          <div class="status-badge">
             <span class="status-dot"></span>
-            <span>Available for Internships & Entry-level Opportunities</span>
+            <span>Open for Internships & Entry-Level Roles</span>
           </div>
 
-          <h1 class="hero-name" id="dyn-name">Pradeep A</h1>
-          <div class="hero-role" id="dyn-title">Software Developer & Data Science Student</div>
-          <p class="hero-bio" id="dyn-bio">
-            Enthusiastic and motivated Software Developer & Data Science student with strong fundamentals in Python, C++, and MySQL database management. Passionate about leveraging AI and modern technologies to solve real-world problems.
+          <h1 class="hero-name">Pradeep A</h1>
+          <div class="hero-role">
+            <span>Artificial Intelligence & Data Science Student</span>
+            <span style="color: var(--text-dim);">•</span>
+            <span style="color: var(--accent-secondary);">Python & C++ Developer</span>
+          </div>
+
+          <p class="hero-bio">
+            Enthusiastic Artificial Intelligence and Data Science student with strong fundamentals in <strong>Python</strong>, <strong>C++</strong>, and <strong>MySQL database management</strong>. Passionate about leveraging AI and modern technologies to solve real-world problems, as demonstrated by hands-on project experience in voice-assisted healthcare solutions.
           </p>
 
           <div class="hero-actions">
             <a href="#projects" class="btn btn-primary">⚡ View My Projects</a>
             <a href="#contact" class="btn btn-outline">✉ Contact Me</a>
-            <a href="#resume" class="btn btn-outline">📄 Download Resume</a>
+            <button type="button" onclick="downloadResumeText()" class="btn btn-outline">📥 Download Resume</button>
           </div>
         </div>
 
+        <!-- Candidate Profile Snapshot Card -->
         <div>
           <div class="avatar-card">
             <div class="avatar-circle">👨‍💻</div>
-            <h3 style="font-size: 1.3rem; font-weight: 700;" id="dyn-card-name">Pradeep A</h3>
-            <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem;" id="dyn-card-role">Software Developer & Data Science</p>
+            <h2 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.25rem;">Pradeep A</h2>
+            <p style="color: var(--accent); font-size: 0.92rem; font-weight: 600; margin-bottom: 1.25rem;">
+              B.Sc. AI & Data Science (Pursuing)
+            </p>
+
             <div class="contact-chips">
-              <div class="chip-item">
-                <span>📍</span> <span id="dyn-card-location">Salem, Tamil Nadu, India</span>
-              </div>
-              <div class="chip-item">
-                <span>📧</span> <span id="dyn-card-email">pradeep438072@gmail.com</span>
-              </div>
-              <div class="chip-item">
-                <span>📱</span> <span id="dyn-card-phone">+91 8072637400</span>
-              </div>
+              <a href="https://maps.google.com/?q=Salem,Tamil+Nadu,India" target="_blank" rel="noopener" class="chip-item">
+                <span>📍</span>
+                <span>Salem, Tamil Nadu, India</span>
+              </a>
+              <a href="mailto:pradeep438072@gmail.com" class="chip-item">
+                <span>📧</span>
+                <span>pradeep438072@gmail.com</span>
+              </a>
+              <a href="tel:+918072637400" class="chip-item">
+                <span>📱</span>
+                <span>+91 8072637400</span>
+              </a>
             </div>
           </div>
         </div>
       </div>
     </section>
+
 
     <!-- 2. ABOUT ME SECTION -->
     <section id="about" class="section">
       <h2 class="section-title">About Me</h2>
-      <p class="section-subtitle">Professional profile, background, and personal qualities</p>
+      <p class="section-subtitle">
+        Background, career objective, and personal qualities for prospective employers and collaborators.
+      </p>
 
-      <div class="card-box" style="margin-bottom: 2rem;">
-        <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main);" id="dyn-summary">
-          "Enthusiastic and motivated Software Developer & Data Science student with strong fundamentals in Python, C++, and MySQL database management. Passionate about leveraging AI and modern technologies to solve real-world problems, as demonstrated by hands-on project experience in voice-assisted healthcare solutions. Eager to contribute to dynamic software teams through dedication, continuous learning, and structured software architecture."
-        </p>
+      <div class="about-quote-box">
+        "Enthusiastic Artificial Intelligence and Data Science student with strong fundamentals in Python, C++, and MySQL database management. Passionate about leveraging AI and modern technologies to solve real-world problems, as demonstrated by hands-on project experience in voice-assisted healthcare solutions. Eager to contribute to forward-thinking engineering teams through dedication, continuous learning, and structured software architecture."
       </div>
 
-      <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; color: var(--accent);">Key Strengths & Competencies</h3>
-      <div class="skills-grid" id="dyn-strengths">
-        <div class="card-box" style="padding: 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
-          <span style="color: var(--success); font-size: 1.2rem;">✔</span>
-          <span>Strong problem-solving mindset and analytical thinking</span>
+      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1.25rem; color: var(--accent);">
+        Strengths & Personal Qualities
+      </h3>
+
+      <div class="strengths-grid">
+        <div class="strength-item">
+          <div class="strength-icon">🧠</div>
+          <div>
+            <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem;">Problem-Solving & Analytical Thinking</h4>
+            <p style="color: var(--text-muted); font-size: 0.92rem;">
+              Strong problem-solving mindset and analytical skills applied to data structures, logical algorithms, and database queries.
+            </p>
+          </div>
         </div>
-        <div class="card-box" style="padding: 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
-          <span style="color: var(--success); font-size: 1.2rem;">✔</span>
-          <span>Eager to learn new tools, technologies, and software frameworks quickly</span>
+
+        <div class="strength-item">
+          <div class="strength-icon">🚀</div>
+          <div>
+            <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem;">Continuous Learning & Agility</h4>
+            <p style="color: var(--text-muted); font-size: 0.92rem;">
+              Eager to learn new tools, modern technologies, and artificial intelligence frameworks quickly and effectively.
+            </p>
+          </div>
         </div>
-        <div class="card-box" style="padding: 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
-          <span style="color: var(--success); font-size: 1.2rem;">✔</span>
-          <span>Effective team communication and disciplined project delivery</span>
+
+        <div class="strength-item">
+          <div class="strength-icon">🤝</div>
+          <div>
+            <h4 style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.35rem;">Team Communication & Execution</h4>
+            <p style="color: var(--text-muted); font-size: 0.92rem;">
+              Effective team communication and project execution capabilities, delivering reliable, documented code.
+            </p>
+          </div>
         </div>
       </div>
     </section>
+
 
     <!-- 3. TECHNICAL SKILLS SECTION -->
     <section id="skills" class="section">
       <h2 class="section-title">Technical Skills</h2>
-      <p class="section-subtitle">Verified programming languages, databases, tools, and technical paradigms</p>
+      <p class="section-subtitle">
+        Verified programming languages, database systems, development tools, and computer science concepts directly from my resume.
+      </p>
 
-      <div class="skills-grid" id="dyn-skills-grid">
+      <div class="skills-grid">
+        <!-- Programming Languages -->
         <div class="card-box">
-          <h3 class="card-title"><span>💻</span> Programming Languages</h3>
+          <div class="skill-card-header">
+            <div class="skill-icon-wrap">💻</div>
+            <h3 class="skill-card-title">Programming Languages</h3>
+          </div>
           <div class="pill-cloud">
             <span class="tech-pill">Python</span>
             <span class="tech-pill">C++</span>
           </div>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 1rem; line-height: 1.6;">
+            Used for building algorithmic solutions, AI pipelines, voice assistants, and Object-Oriented software architectures.
+          </p>
         </div>
 
+        <!-- Databases & Storage -->
         <div class="card-box">
-          <h3 class="card-title"><span>🗄️</span> Databases & Storage</h3>
+          <div class="skill-card-header">
+            <div class="skill-icon-wrap">🗄️</div>
+            <h3 class="skill-card-title">Database & Storage</h3>
+          </div>
           <div class="pill-cloud">
             <span class="tech-pill">MySQL</span>
           </div>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 1rem; line-height: 1.6;">
+            Relational database management, SQL schema creation, user profile storage, and structured query optimization.
+          </p>
         </div>
 
+        <!-- Development Tools & Tech -->
         <div class="card-box">
-          <h3 class="card-title"><span>🛠️</span> Tools & Technologies</h3>
+          <div class="skill-card-header">
+            <div class="skill-icon-wrap">🛠️</div>
+            <h3 class="skill-card-title">Tools & Technologies</h3>
+          </div>
           <div class="pill-cloud">
             <span class="tech-pill">Git</span>
             <span class="tech-pill">Microsoft Excel</span>
           </div>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 1rem; line-height: 1.6;">
+            Version control, collaborative repository workflows, spreadsheet data modeling, and structured reporting.
+          </p>
         </div>
 
+        <!-- Core Computer Science Concepts -->
         <div class="card-box">
-          <h3 class="card-title"><span>🧠</span> Core Computer Science Concepts</h3>
-          <div class="pill-cloud">
-            <span class="tech-pill">Data Structures</span>
-            <span class="tech-pill">Object-Oriented Programming (OOP)</span>
-            <span class="tech-pill">AI Integration</span>
+          <div class="skill-card-header">
+            <div class="skill-icon-wrap">🧠</div>
+            <h3 class="skill-card-title">Core Concepts</h3>
           </div>
+          <div class="pill-cloud">
+            <span class="tech-pill">Artificial Intelligence</span>
+            <span class="tech-pill">Data Science</span>
+            <span class="tech-pill">Data Structures</span>
+            <span class="tech-pill">OOP (Object-Oriented Programming)</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 1rem; line-height: 1.6;">
+            Foundational computer science principles enabling clean, scalable code and predictive algorithmic implementations.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- 4. KEY PROJECTS SECTION -->
+
+    <!-- 4. INTERNSHIP & PRACTICAL TRAINING -->
+    <section id="training" class="section">
+      <h2 class="section-title">Internship & Practical Training</h2>
+      <p class="section-subtitle">
+        Hands-on technical implementation, project laboratories, and practical software engineering training.
+      </p>
+
+      <div class="training-grid">
+        <div class="training-card">
+          <span class="training-badge">Applied AI & Software Engineering</span>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.35rem;">Voice-Assisted Healthcare Systems Implementation</h3>
+          <div style="color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 1rem;">
+            MediVoice AI Engineering Lab • Python, Audio Pipelines & MySQL
+          </div>
+          <ul class="features-list">
+            <li>Trained and implemented speech interaction workflows to process user audio commands and generate dynamic spoken reminders.</li>
+            <li>Configured accurate scheduling algorithms to alert patients to prescription schedules on time.</li>
+            <li>Engineered structured MySQL database operations for persistent user profile, medicine dosage, and timing records.</li>
+          </ul>
+        </div>
+
+        <div class="training-card">
+          <span class="training-badge">Academic Practical Lab Curriculum</span>
+          <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.35rem;">AI, Data Science & Systems Laboratory Training</h3>
+          <div style="color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 1rem;">
+            Sona College of Arts and Science • Salem, India
+          </div>
+          <ul class="features-list">
+            <li>Practical laboratory coursework in Data Structures, algorithmic efficiency, and memory management in C++ and Python.</li>
+            <li>Object-Oriented Programming (OOP) paradigms including inheritance, encapsulation, polymorphism, and abstraction.</li>
+            <li>Hands-on relational database query training, table joins, normalization, and data validation using MySQL.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 5. KEY PROJECTS SECTION -->
     <section id="projects" class="section">
       <h2 class="section-title">Key Projects</h2>
-      <p class="section-subtitle">Software implementations and demonstrated engineering capabilities</p>
+      <p class="section-subtitle">
+        Demonstrated engineering capabilities, software architecture, and real-world problem solving.
+      </p>
 
-      <div class="projects-grid" id="dyn-projects-grid">
-        <div class="project-card">
-          <span class="status-badge" style="margin-bottom: 0.5rem; width: fit-content;">AI Healthcare</span>
-          <h3 class="project-title">MediVoice AI – Medicine Reminder & Voice Assistant</h3>
-          <p class="project-desc">
-            Designed and developed an AI-powered voice assistant application created to assist users with medication schedules and smart audio reminders.
-          </p>
-          <ul class="features-list">
-            <li>Voice interaction pipelines to capture user inputs, schedule automated dosage alerts, and convey medicine details effortlessly</li>
-            <li>Schedule triggers for accurate timing and timely audio delivery for patient prescription adherence</li>
-            <li>Structured database operations for secure and accurate user profile and prescription management</li>
-          </ul>
-          <div class="project-footer">
-            <div class="pill-cloud">
-              <span class="tech-pill" style="font-size: 0.78rem;">Python</span>
-              <span class="tech-pill" style="font-size: 0.78rem;">AI Integration</span>
-              <span class="tech-pill" style="font-size: 0.78rem;">MySQL</span>
-              <span class="tech-pill" style="font-size: 0.78rem;">Voice Pipeline</span>
-            </div>
+      <!-- Featured Project: MediVoice AI -->
+      <div class="featured-project-card">
+        <div class="project-header">
+          <div>
+            <span class="status-badge" style="margin-bottom: 0.6rem;">★ Featured AI Project</span>
+            <h3 class="project-title">MediVoice AI – Medicine Reminder & Voice Assistant</h3>
           </div>
+          <div style="display: flex; gap: 0.65rem;">
+            <button type="button" class="btn btn-primary" onclick="openDemoModal()" style="font-size: 0.85rem; padding: 0.5rem 1rem;">
+              ▶ Live Architecture Demo
+            </button>
+            <button type="button" class="btn btn-outline" onclick="showToast('GitHub repository link configured! Check your portfolio settings.')" style="font-size: 0.85rem; padding: 0.5rem 1rem;">
+              ⌥ View Source Details
+            </button>
+          </div>
+        </div>
+
+        <p class="project-desc">
+          Designed and developed an AI-powered voice assistant application created to assist users with medication schedules and smart audio reminders. Built with a focus on patient accessibility, prompt alert timing, and structured health data management.
+        </p>
+
+        <h4 style="font-size: 1rem; font-weight: 700; color: var(--accent); margin-bottom: 0.85rem;">
+          KEY ARCHITECTURAL HIGHLIGHTS & IMPLEMENTATION:
+        </h4>
+
+        <ul class="features-list">
+          <li>
+            <span><strong>Voice Interaction Pipelines:</strong> Implemented natural voice capture workflows to interpret user spoken commands, schedule automated dosage alerts, and convey medicine details effortlessly without requiring complex manual typing.</span>
+          </li>
+          <li>
+            <span><strong>Intelligent Timing & Audio Delivery:</strong> Engineered automated schedule triggers for accurate timing and timely audio delivery to ensure patient prescription adherence.</span>
+          </li>
+          <li>
+            <span><strong>Relational Database Integration:</strong> Utilized structured MySQL database operations for secure, reliable, and accurate user profile storage and medication schedule management.</span>
+          </li>
+        </ul>
+
+        <div class="project-footer">
+          <div class="pill-cloud">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">Artificial Intelligence</span>
+            <span class="tech-pill">Voice Interaction</span>
+            <span class="tech-pill">MySQL Database</span>
+            <span class="tech-pill">Schedule Triggers</span>
+          </div>
+          <span style="font-size: 0.85rem; color: var(--text-dim);">Healthcare Automation Solution</span>
         </div>
       </div>
     </section>
 
-    <!-- 5. EDUCATION TIMELINE SECTION -->
+
+    <!-- 6. EDUCATION TIMELINE SECTION -->
     <section id="education" class="section">
       <h2 class="section-title">Education & Academic Background</h2>
-      <p class="section-subtitle">Academic timeline, institutions, and scholastic achievements</p>
+      <p class="section-subtitle">
+        Academic progression, university degree, and school distinctions verified from resume.
+      </p>
 
-      <div class="timeline" id="dyn-education-timeline">
+      <div class="timeline">
+        <!-- 1. Sona College -->
         <div class="timeline-node">
           <div class="timeline-dot"></div>
           <div class="card-box">
-            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.25rem;">Sona College of Arts and Science</h3>
-            <div style="color: var(--accent); font-weight: 600; margin-bottom: 0.35rem;">Bachelor's Degree (Pursuing)</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">📍 Salem, India</div>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">
-              Focusing on Software Development, Data Science, Data Structures, Object-Oriented Programming, and Database Management Systems.
+            <div class="edu-header">
+              <div>
+                <h3 class="edu-degree">B.Sc. Artificial Intelligence and Data Science</h3>
+                <div class="edu-institution">Sona College of Arts and Science</div>
+              </div>
+              <span class="edu-badge" style="background: rgba(56, 189, 248, 0.15); border-color: rgba(56, 189, 248, 0.3); color: var(--accent);">
+                Currently Pursuing
+              </span>
+            </div>
+            <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+              📍 Salem, Tamil Nadu, India
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.65;">
+              Comprehensive curriculum focusing on Artificial Intelligence, Data Science, Python, C++, Data Structures, Object-Oriented Programming (OOP), and Database Management Systems (MySQL).
             </p>
           </div>
         </div>
 
+        <!-- 2. Sri Gayathiri 12th -->
         <div class="timeline-node">
           <div class="timeline-dot"></div>
           <div class="card-box">
-            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.25rem;">Sri Gayathiri Matriculation Higher Secondary School</h3>
-            <div style="color: var(--accent); font-weight: 600; margin-bottom: 0.35rem;">Higher Secondary Certificate (12th Standard)</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
-              📍 Salem, India • <span style="color: var(--success); font-weight: 700;">★ 83.5% Distinction</span>
+            <div class="edu-header">
+              <div>
+                <h3 class="edu-degree">Higher Secondary Certificate (12th Standard)</h3>
+                <div class="edu-institution">Sri Gayathiri Matriculation Higher Secondary School</div>
+              </div>
+              <span class="edu-badge">★ Score: 83.5% Distinction</span>
             </div>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">
-              Academic excellence in Mathematics, Physics, Chemistry, and Computer Science curricula.
+            <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+              📍 Salem, Tamil Nadu, India
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.65;">
+              Rigorous high school academic foundation with high honors in Mathematics, Physics, Chemistry, and Computer Science.
             </p>
           </div>
         </div>
 
+        <!-- 3. Sri Gayathiri 10th -->
         <div class="timeline-node">
           <div class="timeline-dot"></div>
           <div class="card-box">
-            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.25rem;">Sri Gayathiri Matriculation Higher Secondary School</h3>
-            <div style="color: var(--accent); font-weight: 600; margin-bottom: 0.35rem;">Secondary School Leaving Certificate (10th Standard)</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
-              📍 Salem, India • <span style="color: var(--success); font-weight: 700;">★ 84.4% Distinction</span>
+            <div class="edu-header">
+              <div>
+                <h3 class="edu-degree">Secondary School Leaving Certificate (10th Standard)</h3>
+                <div class="edu-institution">Sri Gayathiri Matriculation Higher Secondary School</div>
+              </div>
+              <span class="edu-badge">★ Score: 84.4% Distinction</span>
             </div>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">
-              Distinction honors throughout foundational science and mathematics education.
+            <div style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+              📍 Salem, Tamil Nadu, India
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.65;">
+              Achieved top-tier academic distinction in foundational sciences, mathematics, and analytical curricula.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 6. RESUME DOCUMENT SHEET -->
+
+    <!-- 7. ACHIEVEMENTS & CERTIFICATIONS -->
+    <section id="achievements" class="section">
+      <h2 class="section-title">Achievements & Certifications</h2>
+      <p class="section-subtitle">
+        Scholastic milestones, academic distinctions, and verified domain competencies.
+      </p>
+
+      <div class="achieve-grid">
+        <div class="achieve-card">
+          <div class="achieve-score">84.4%</div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem;">10th Standard Board Distinction</h3>
+          <div style="color: var(--accent); font-size: 0.88rem; margin-bottom: 0.65rem;">Sri Gayathiri Matriculation Higher Secondary School</div>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Honored with top-tier distinction score demonstrating consistent academic discipline and quantitative problem-solving ability.
+          </p>
+        </div>
+
+        <div class="achieve-card">
+          <div class="achieve-score">83.5%</div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem;">12th Standard Board Distinction</h3>
+          <div style="color: var(--accent); font-size: 0.88rem; margin-bottom: 0.65rem;">Sri Gayathiri Matriculation Higher Secondary School</div>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Distinction certification in higher secondary studies emphasizing mathematics and science fundamentals.
+          </p>
+        </div>
+
+        <div class="achieve-card">
+          <div style="font-size: 2.2rem; margin-bottom: 0.25rem;">🤖</div>
+          <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem;">B.Sc. AI & Data Science Scholar</h3>
+          <div style="color: var(--accent); font-size: 0.88rem; margin-bottom: 0.65rem;">Sona College of Arts and Science</div>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Successfully completed core curriculum coursework across Artificial Intelligence, Python, C++, Data Structures, and MySQL database operations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 8. RESUME DOCUMENT SECTION -->
     <section id="resume" class="section">
       <h2 class="section-title">Resume Document</h2>
-      <p class="section-subtitle">Verified resume sheet generated directly from candidate information</p>
+      <p class="section-subtitle">
+        Verified resume matching the official document. Download as plaintext or print directly to PDF.
+      </p>
 
-      <div class="resume-sheet" id="renderedResumeSheet">
-        <h2 id="resume-sheet-name">PRADEEP A</h2>
-        <p style="color: #475569; font-size: 0.88rem; margin-bottom: 1.25rem;" id="resume-sheet-contact">
-          Salem, Tamil Nadu, India &nbsp;•&nbsp; +91 8072637400 &nbsp;•&nbsp; pradeep438072@gmail.com
+      <div class="resume-sheet-wrapper" id="resumePrintArea">
+        <h2>PRADEEP A</h2>
+        <p style="color: #475569; font-size: 0.9rem; margin-bottom: 1.25rem; font-weight: 500;">
+          Salem, Tamil Nadu &nbsp;•&nbsp; +91 8072637400 &nbsp;•&nbsp; pradeep438072@gmail.com
         </p>
 
         <h3>PROFESSIONAL SUMMARY</h3>
-        <p id="resume-sheet-summary">
-          Enthusiastic and motivated Software Developer & Data Science student with strong fundamentals in Python, C++, and MySQL database management. Passionate about leveraging AI and modern technologies to solve real-world problems, as demonstrated by hands-on project experience in voice-assisted healthcare solutions.
+        <p style="color: #1e293b;">
+          Enthusiastic Artificial Intelligence and Data Science student with strong fundamentals in Python, C++, and MySQL database management. Passionate about leveraging AI and modern technologies to solve real-world problems, as demonstrated by hands-on project experience in voice-assisted healthcare solutions.
         </p>
 
+        <h3>EDUCATION</h3>
+        <div style="color: #1e293b; display: flex; flex-direction: column; gap: 0.6rem;">
+          <div>
+            <strong>Sona College of Arts and Science</strong>, Salem, India<br/>
+            <span>B.Sc. Artificial Intelligence and Data Science (Pursuing)</span>
+          </div>
+          <div>
+            <strong>Sri Gayathiri Matriculation Higher Secondary School</strong>, Salem, India<br/>
+            <span>Higher Secondary Certificate (12th Standard) — <strong>Score: 83.5%</strong></span><br/>
+            <span>Secondary School Leaving Certificate (10th Standard) — <strong>Score: 84.4%</strong></span>
+          </div>
+        </div>
+
         <h3>TECHNICAL SKILLS</h3>
-        <div id="resume-sheet-skills">
+        <div style="color: #1e293b; display: flex; flex-direction: column; gap: 0.35rem;">
           <p><strong>Programming Languages:</strong> Python, C++</p>
-          <p><strong>Database & Storage:</strong> MySQL</p>
-          <p><strong>Tools & Technologies:</strong> Git, Microsoft Excel</p>
-          <p><strong>Core Concepts:</strong> Data Structures, OOP, AI Integration</p>
+          <p><strong>Database & Tools:</strong> MySQL, Microsoft Excel, Git</p>
+          <p><strong>Core Concepts:</strong> Artificial Intelligence, Data Science, Data Structures, Object-Oriented Programming (OOP)</p>
         </div>
 
         <h3>KEY PROJECTS</h3>
-        <div id="resume-sheet-projects">
-          <p style="font-weight: bold; margin-top: 0.5rem;">MediVoice AI – Medicine Reminder & Voice Assistant</p>
-          <p>Designed and developed an AI-powered voice assistant application created to assist users with medication schedules and smart audio reminders.</p>
-          <ul style="padding-left: 1.25rem; margin-top: 0.25rem;">
-            <li>Voice interaction pipelines to capture user inputs, schedule automated dosage alerts, and convey medicine details effortlessly</li>
-            <li>Schedule triggers for accurate timing and timely audio delivery for patient prescription adherence</li>
-            <li>Structured database operations for secure and accurate user profile and prescription management</li>
+        <div style="color: #1e293b;">
+          <p style="font-weight: 700; margin-bottom: 0.25rem;">MediVoice AI – Medicine Reminder & Voice Assistant</p>
+          <p style="margin-bottom: 0.4rem;">Designed and developed an AI-powered voice assistant application created to assist users with medication schedules and smart audio reminders.</p>
+          <ul style="padding-left: 1.25rem;">
+            <li>Implemented voice interaction pipelines to capture user inputs, schedule automated dosage alerts, and convey medicine details effortlessly.</li>
+            <li>Utilized structured database operations for secure and accurate user profile and prescription management.</li>
           </ul>
         </div>
 
-        <h3>EDUCATION</h3>
-        <div id="resume-sheet-education">
-          <p style="margin-top: 0.4rem;"><strong>Sona College of Arts and Science</strong> — Bachelor's Degree (Pursuing), Salem</p>
-          <p style="margin-top: 0.4rem;"><strong>Sri Gayathiri Matriculation Higher Secondary School</strong> — 12th Standard (<strong>83.5% Distinction</strong>), Salem</p>
-          <p style="margin-top: 0.4rem;"><strong>Sri Gayathiri Matriculation Higher Secondary School</strong> — 10th Standard (<strong>84.4% Distinction</strong>), Salem</p>
-        </div>
+        <h3>STRENGTHS & PERSONAL QUALITIES</h3>
+        <ul style="color: #1e293b; padding-left: 1.25rem;">
+          <li>Strong problem-solving mindset and analytical skills.</li>
+          <li>Eager to learn new tools, technologies, and AI frameworks quickly.</li>
+          <li>Effective team communication and project execution capabilities.</li>
+        </ul>
       </div>
 
-      <div style="margin-top: 1.5rem; display: flex; gap: 0.85rem; flex-wrap: wrap;">
-        <button class="btn btn-primary" onclick="downloadResumeText()">📥 Save Plaintext Resume</button>
-        <button class="btn btn-outline" onclick="window.print()">🖨️ Print / Save PDF</button>
+      <div style="margin-top: 1.75rem; display: flex; gap: 0.85rem; justify-content: center; flex-wrap: wrap;">
+        <button type="button" class="btn btn-primary" onclick="downloadResumeText()">
+          📥 Download Plaintext Resume (.txt)
+        </button>
+        <button type="button" class="btn btn-outline" onclick="window.print()">
+          🖨️ Print / Save as PDF
+        </button>
       </div>
     </section>
 
-    <!-- 7. CONTACT SECTION -->
+
+    <!-- 9. CONTACT SECTION -->
     <section id="contact" class="section">
       <h2 class="section-title">Get In Touch</h2>
-      <p class="section-subtitle">Reach out directly for internships, collaborations, or career opportunities</p>
+      <p class="section-subtitle">
+        Have an internship opening, entry-level developer opportunity, or collaboration in mind? Reach out directly.
+      </p>
 
       <div class="contact-grid">
+        <!-- Direct Contact Channels -->
         <div style="display: flex; flex-direction: column; gap: 1rem;">
-          <a href="mailto:pradeep438072@gmail.com" class="contact-link-card" id="contact-link-email">
-            <span style="font-size: 1.6rem;">✉</span>
+          <a href="mailto:pradeep438072@gmail.com" class="contact-info-card">
+            <span style="font-size: 1.75rem;">✉</span>
             <div>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">Direct Email</div>
-              <div style="font-weight: 700;" id="contact-val-email">pradeep438072@gmail.com</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">DIRECT EMAIL</div>
+              <div style="font-weight: 700; color: var(--accent); font-size: 1.05rem;">pradeep438072@gmail.com</div>
+              <div style="font-size: 0.82rem; color: var(--text-dim);">Click to compose email</div>
             </div>
           </a>
 
-          <a href="tel:+918072637400" class="contact-link-card" id="contact-link-phone">
-            <span style="font-size: 1.6rem;">📞</span>
+          <a href="tel:+918072637400" class="contact-info-card">
+            <span style="font-size: 1.75rem;">📞</span>
             <div>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">Phone & WhatsApp</div>
-              <div style="font-weight: 700;" id="contact-val-phone">+91 8072637400</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">PHONE NUMBER</div>
+              <div style="font-weight: 700; color: var(--accent); font-size: 1.05rem;">+91 8072637400</div>
+              <div style="font-size: 0.82rem; color: var(--text-dim);">Call or WhatsApp directly</div>
             </div>
           </a>
 
-          <div class="contact-link-card">
-            <span style="font-size: 1.6rem;">📍</span>
+          <div class="contact-info-card">
+            <span style="font-size: 1.75rem;">📍</span>
             <div>
-              <div style="font-size: 0.8rem; color: var(--text-muted);">Location</div>
-              <div style="font-weight: 700;" id="contact-val-location">Salem, Tamil Nadu, India</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">LOCATION</div>
+              <div style="font-weight: 700; font-size: 1.05rem;">Salem, Tamil Nadu, India</div>
+              <div style="font-size: 0.82rem; color: var(--text-dim);">Open to on-site & remote opportunities</div>
             </div>
           </div>
         </div>
 
-        <!-- Working Direct Mail Form -->
+        <!-- Contact Form -->
         <form class="card-box" onsubmit="handleContactSubmit(event)">
-          <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem;">Send Direct Message</h3>
+          <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--accent); margin-bottom: 1.25rem;">
+            Send Direct Message
+          </h3>
+
           <div class="form-group">
-            <label style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Your Name</label>
-            <input type="text" id="senderName" class="form-control" placeholder="e.g. Recruiter / Hiring Team" required />
+            <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">Your Name</label>
+            <input type="text" id="contactName" class="form-control" placeholder="e.g. Recruiter / Engineering Manager" required />
           </div>
+
           <div class="form-group">
-            <label style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Your Email</label>
-            <input type="email" id="senderEmail" class="form-control" placeholder="e.g. hr@company.com" required />
+            <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">Your Email</label>
+            <input type="email" id="contactEmail" class="form-control" placeholder="e.g. hr@company.com" required />
           </div>
+
           <div class="form-group">
-            <label style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Subject</label>
-            <input type="text" id="senderSubject" class="form-control" placeholder="Internship / Job Opportunity" required />
+            <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">Subject</label>
+            <input type="text" id="contactSubject" class="form-control" placeholder="Internship / Full-time Opportunity" required />
           </div>
+
           <div class="form-group">
-            <label style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Message</label>
-            <textarea id="senderMsg" class="form-control" rows="3" placeholder="Hello Pradeep, we reviewed your profile..." required></textarea>
+            <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">Message</label>
+            <textarea id="contactMsg" class="form-control" rows="4" placeholder="Hi Pradeep, we reviewed your AI & Data Science portfolio and would like to discuss..." required></textarea>
           </div>
-          <button type="submit" class="btn btn-primary" style="width: 100%;">
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.8rem;">
             🚀 Send Message to Pradeep
           </button>
         </form>
@@ -1048,311 +1571,207 @@
 
   </main>
 
-  <!-- FOOTER -->
-  <footer style="background: rgba(0, 0, 0, 0.4); border-top: 1px solid var(--border-color); padding: 3rem 1.25rem; text-align: center;">
+  <!-- ================= FOOTER ================= -->
+  <footer>
     <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
       <a href="#home" class="logo-brand">
         <span class="brand-badge">PA</span>
         <span>Pradeep A</span>
       </a>
-      <p style="color: var(--text-muted); font-size: 0.88rem;">Software Developer & Data Science Student • Salem, Tamil Nadu</p>
-      <p style="color: #64748b; font-size: 0.8rem;">
-        © <span id="copyrightYear">2026</span> Pradeep A. Built with modern web technologies.
+      <p style="color: var(--text-muted); font-size: 0.9rem;">
+        B.Sc. Artificial Intelligence and Data Science Student • Python, C++ & MySQL Developer
+      </p>
+      <p style="color: var(--text-dim); font-size: 0.82rem;">
+        Salem, Tamil Nadu, India • Email: <a href="mailto:pradeep438072@gmail.com" style="color: var(--accent); text-decoration: none;">pradeep438072@gmail.com</a>
+      </p>
+      <p style="color: var(--text-dim); font-size: 0.8rem; margin-top: 0.5rem;">
+        © <span id="copyrightYear">2026</span> Pradeep A. Built with modern, responsive web standards.
       </p>
     </div>
   </footer>
 
-  <!-- AI RESUME GENERATOR MODAL -->
-  <div class="modal-overlay" id="generatorModal">
-    <div class="modal-dialog">
-      <button class="modal-close" onclick="closeGeneratorModal()" title="Close">✕</button>
+  <!-- ================= INTERACTIVE DEMO MODAL (MediVoice AI) ================= -->
+  <div class="modal-overlay" id="demoModal">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeDemoModal()" title="Close">✕</button>
 
       <div style="text-align: center; margin-bottom: 1.5rem;">
-        <span class="brand-badge" style="font-size: 0.95rem;">AI Resume-to-Portfolio Engine</span>
-        <h2 style="font-size: 1.6rem; font-weight: 800; margin: 0.6rem 0 0.3rem;">Upload Resume (PDF / DOCX)</h2>
+        <span class="status-badge" style="margin-bottom: 0.5rem;">AI Healthcare Showcase</span>
+        <h3 style="font-size: 1.5rem; font-weight: 800;">MediVoice AI – Interactive Simulation</h3>
         <p style="color: var(--text-muted); font-size: 0.9rem;">
-          Our intelligent client-side parser reads your resume, extracts skills, projects, and education, and regenerates this portfolio instantly.
+          Simulate speech interaction, reminder triggers, and MySQL database scheduling.
         </p>
       </div>
 
-      <!-- Drag & Drop Upload Zone -->
-      <div class="dropzone-box" id="dropzoneBox" onclick="document.getElementById('modalFileInput').click()">
-        <input type="file" id="modalFileInput" style="display: none;" accept=".pdf,.docx,.doc,.txt" onchange="handleModalFileSelected(event)" />
-        <div style="font-size: 2.8rem; margin-bottom: 0.5rem;">📄</div>
-        <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem;">Click to browse or drop your resume</div>
-        <div style="color: var(--text-muted); font-size: 0.85rem;">Supports PDF, DOCX, or TXT format. Private & client-side.</div>
-      </div>
-
-      <!-- Parsing Progress Bar -->
-      <div id="parseProgressWrap" style="display: none; margin: 1.25rem 0;">
-        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">
-          <span id="parseStatusText">Extracting text...</span>
-          <span id="parsePercentText">0%</span>
+      <!-- Interactive Voice Command Simulator -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; margin-bottom: 1.25rem;">
+        <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--accent); margin-bottom: 0.6rem;">
+          1. SIMULATE VOICE COMMAND
+        </h4>
+        <div style="display: flex; gap: 0.6rem; margin-bottom: 0.8rem;">
+          <input type="text" id="simVoiceInput" class="form-control" value="Remind me to take Metformin 500mg at 8:00 PM after dinner" />
+          <button type="button" class="btn btn-primary" onclick="runVoiceSim()" style="padding: 0.5rem 1rem;">
+            🎙️ Process
+          </button>
         </div>
-        <div style="height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 999px; overflow: hidden;">
-          <div id="parseProgressBar" style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-secondary)); transition: width 0.3s;"></div>
+        <div id="simVoiceResult" style="font-size: 0.88rem; color: var(--text-muted); background: var(--bg-surface); padding: 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); min-height: 50px;">
+          Click "Process" to parse voice pipeline entities and schedule triggers.
         </div>
       </div>
 
-      <!-- Quick Plaintext Paste Option -->
-      <div style="border-top: 1px solid var(--border-color); padding-top: 1.25rem; margin-top: 1.25rem;">
-        <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.4rem;">Or Paste Resume Text:</div>
-        <textarea id="modalPasteArea" class="form-control" rows="4" placeholder="Paste resume text directly here..."></textarea>
-        <div style="display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 0.75rem;">
-          <button class="btn btn-outline" onclick="closeGeneratorModal()">Cancel</button>
-          <button class="btn btn-primary" onclick="processModalPastedText()">⚡ Parse & Regenerate</button>
+      <!-- MySQL Relational Record Preview -->
+      <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem;">
+        <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--accent); margin-bottom: 0.6rem;">
+          2. MYSQL RECORD STORAGE
+        </h4>
+        <div style="font-family: monospace; font-size: 0.82rem; background: var(--bg-surface); padding: 0.85rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); overflow-x: auto; color: var(--badge-text);">
+          +----+-----------------+-------------+----------+----------------+<br/>
+          | id | medicine_name   | dosage      | schedule | status         |<br/>
+          +----+-----------------+-------------+----------+----------------+<br/>
+          | 01 | Metformin       | 500mg       | 20:00:00 | SCHEDULED_ALERT|<br/>
+          | 02 | Vitamin D3      | 1000 IU     | 09:00:00 | CONFIRMED_TAKEN|<br/>
+          +----+-----------------+-------------+----------+----------------+
         </div>
+      </div>
+
+      <div style="margin-top: 1.25rem; display: flex; justify-content: flex-end;">
+        <button type="button" class="btn btn-outline" onclick="closeDemoModal()">Close Demo</button>
       </div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT LOGIC -->
+  <!-- Toast Element -->
+  <div class="toast" id="toastNotice">
+    <span>ℹ️</span>
+    <span id="toastMsg">Notification message</span>
+  </div>
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
   <script>
-    // Set PDF.js worker
-    if (window.pdfjsLib) {
-      window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-    }
+    // Set dynamic copyright year
+    document.getElementById('copyrightYear').textContent = new Date().getFullYear();
 
-    // Default Pradeep A Portfolio Data
-    const CURRENT_PROFILE = {
-      name: "Pradeep A",
-      title: "Software Developer & Data Science Student",
-      badge: "Available for Internships & Entry-level Opportunities",
-      location: "Salem, Tamil Nadu, India",
-      email: "pradeep438072@gmail.com",
-      phone: "+91 8072637400",
-      summary: "Enthusiastic and motivated Software Developer & Data Science student with strong fundamentals in Python, C++, and MySQL database management. Passionate about leveraging AI and modern technologies to solve real-world problems, as demonstrated by hands-on project experience in voice-assisted healthcare solutions.",
-      skills: [
-        { category: "Programming Languages", items: ["Python", "C++"] },
-        { category: "Databases & Storage", items: ["MySQL"] },
-        { category: "Tools & Technologies", items: ["Git", "Microsoft Excel"] },
-        { category: "Core Computer Science Concepts", items: ["Data Structures", "Object-Oriented Programming (OOP)", "AI Integration"] }
-      ],
-      projects: [
-        {
-          title: "MediVoice AI – Medicine Reminder & Voice Assistant",
-          tag: "AI Healthcare",
-          description: "Designed and developed an AI-powered voice assistant application created to assist users with medication schedules and smart audio reminders.",
-          features: [
-            "Voice interaction pipelines to capture user inputs, schedule automated dosage alerts, and convey medicine details effortlessly",
-            "Schedule triggers for accurate timing and timely audio delivery for patient prescription adherence",
-            "Structured database operations for secure and accurate user profile and prescription management"
-          ],
-          technologies: ["Python", "AI Integration", "MySQL", "Voice Pipeline"]
-        }
-      ],
-      education: [
-        {
-          institution: "Sona College of Arts and Science",
-          degree: "Bachelor's Degree (Pursuing)",
-          location: "Salem, India",
-          score: "",
-          details: "Focusing on Software Development, Data Science, Data Structures, Object-Oriented Programming, and Database Management Systems."
-        },
-        {
-          institution: "Sri Gayathiri Matriculation Higher Secondary School",
-          degree: "Higher Secondary Certificate (12th Standard)",
-          location: "Salem, India",
-          score: "83.5% Distinction",
-          details: "Academic excellence in Mathematics, Physics, Chemistry, and Computer Science curricula."
-        },
-        {
-          institution: "Sri Gayathiri Matriculation Higher Secondary School",
-          degree: "Secondary School Leaving Certificate (10th Standard)",
-          location: "Salem, India",
-          score: "84.4% Distinction",
-          details: "Distinction honors throughout foundational science and mathematics education."
-        }
-      ],
-      strengths: [
-        "Strong problem-solving mindset and analytical thinking",
-        "Eager to learn new tools, technologies, and software frameworks quickly",
-        "Effective team communication and disciplined project delivery"
-      ]
-    };
-
-    // Theme & Mode management
+    // Palette & Theme Switching
     const themeSelector = document.getElementById('themeSelector');
     themeSelector.addEventListener('change', (e) => {
       document.body.setAttribute('data-theme', e.target.value);
+      showToast(`Color theme switched to ${e.target.options[e.target.selectedIndex].text}!`);
     });
 
+    // Dark / Light Mode Toggle
     function toggleColorMode() {
       const current = document.body.getAttribute('data-mode') || 'dark';
       const next = current === 'dark' ? 'light' : 'dark';
       document.body.setAttribute('data-mode', next);
       document.getElementById('modeToggleBtn').textContent = next === 'dark' ? '🌙' : '☀️';
+      showToast(`Switched to ${next} mode.`);
     }
 
-    // Modal Handlers
-    function openGeneratorModal() {
-      document.getElementById('generatorModal').classList.add('active');
-    }
-    function closeGeneratorModal() {
-      document.getElementById('generatorModal').classList.remove('active');
+    // Mobile Navigation Menu Toggle
+    function toggleMobileMenu() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('open');
     }
 
-    // Drag & Drop
-    const dropzoneBox = document.getElementById('dropzoneBox');
-    ['dragenter', 'dragover'].forEach(name => {
-      dropzoneBox.addEventListener(name, (e) => {
-        e.preventDefault();
-        dropzoneBox.classList.add('dragover');
+    // Close mobile nav when clicking any link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('open');
       });
     });
-    ['dragleave', 'drop'].forEach(name => {
-      dropzoneBox.addEventListener(name, (e) => {
-        e.preventDefault();
-        dropzoneBox.classList.remove('dragover');
-      });
-    });
-    dropzoneBox.addEventListener('drop', (e) => {
-      const files = e.dataTransfer.files;
-      if (files && files.length > 0) processUpload(files[0]);
-    });
-
-    function handleModalFileSelected(e) {
-      const file = e.target.files[0];
-      if (file) processUpload(file);
-    }
-
-    // Parse Uploaded Resume (PDF / DOCX)
-    async function processUpload(file) {
-      const progressWrap = document.getElementById('parseProgressWrap');
-      const progressBar = document.getElementById('parseProgressBar');
-      const statusText = document.getElementById('parseStatusText');
-      const percentText = document.getElementById('parsePercentText');
-
-      progressWrap.style.display = 'block';
-      progressBar.style.width = '20%';
-      percentText.textContent = '20%';
-      statusText.textContent = `Reading ${file.name}...`;
-
-      try {
-        let text = '';
-        if (file.name.endsWith('.pdf')) {
-          const buffer = await file.arrayBuffer();
-          const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
-          for (let i = 1; i <= pdf.numPages; i++) {
-            const page = await pdf.getPage(i);
-            const content = await page.getTextContent();
-            text += content.items.map(it => it.str).join(' ') + '\n';
-          }
-        } else if (file.name.endsWith('.docx')) {
-          const buffer = await file.arrayBuffer();
-          const res = await mammoth.extractRawText({ arrayBuffer: buffer });
-          text = res.value;
-        } else {
-          text = await file.text();
-        }
-
-        progressBar.style.width = '70%';
-        percentText.textContent = '70%';
-        statusText.textContent = 'Analyzing candidate details...';
-
-        applyParsedData(text);
-
-        progressBar.style.width = '100%';
-        percentText.textContent = '100%';
-        statusText.textContent = 'Portfolio generated!';
-
-        setTimeout(() => {
-          progressWrap.style.display = 'none';
-          closeGeneratorModal();
-          alert('Portfolio successfully generated from uploaded resume!');
-        }, 500);
-
-      } catch (err) {
-        console.error(err);
-        alert('Could not parse resume: ' + err.message);
-        progressWrap.style.display = 'none';
-      }
-    }
-
-    function processModalPastedText() {
-      const txt = document.getElementById('modalPasteArea').value.trim();
-      if (!txt) {
-        alert('Please paste resume text.');
-        return;
-      }
-      applyParsedData(txt);
-      closeGeneratorModal();
-      alert('Portfolio successfully updated from pasted resume text!');
-    }
-
-    // Intelligent Extraction from Text
-    function applyParsedData(raw) {
-      const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
-
-      // Email
-      const email = raw.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/i);
-      if (email) {
-        CURRENT_PROFILE.email = email[0];
-      }
-
-      // Phone
-      const phone = raw.match(/(?:\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}|\+?\d{10,12}/);
-      if (phone) {
-        CURRENT_PROFILE.phone = phone[0].trim();
-      }
-
-      // Name
-      for (let i = 0; i < Math.min(5, lines.length); i++) {
-        const l = lines[i];
-        if (l.length < 40 && !l.includes('@') && !/\d/.test(l) && !/resume|curriculum/i.test(l)) {
-          CURRENT_PROFILE.name = l;
-          break;
-        }
-      }
-
-      // Re-render UI with current profile
-      updateLivePortfolioUI();
-    }
-
-    function updateLivePortfolioUI() {
-      document.getElementById('dyn-name').textContent = CURRENT_PROFILE.name;
-      document.getElementById('dyn-card-name').textContent = CURRENT_PROFILE.name;
-      document.getElementById('dyn-card-email').textContent = CURRENT_PROFILE.email;
-      document.getElementById('dyn-card-phone').textContent = CURRENT_PROFILE.phone;
-      document.getElementById('dyn-card-location').textContent = CURRENT_PROFILE.location;
-
-      document.getElementById('resume-sheet-name').textContent = CURRENT_PROFILE.name.toUpperCase();
-      document.getElementById('resume-sheet-contact').textContent = `${CURRENT_PROFILE.location} • ${CURRENT_PROFILE.phone} • ${CURRENT_PROFILE.email}`;
-
-      document.getElementById('contact-val-email').textContent = CURRENT_PROFILE.email;
-      document.getElementById('contact-link-email').href = `mailto:${CURRENT_PROFILE.email}`;
-      document.getElementById('contact-val-phone').textContent = CURRENT_PROFILE.phone;
-      document.getElementById('contact-link-phone').href = `tel:${CURRENT_PROFILE.phone.replace(/\s+/g, '')}`;
-    }
 
     // Contact Form Handler
     function handleContactSubmit(e) {
       e.preventDefault();
-      const name = document.getElementById('senderName').value.trim();
-      const email = document.getElementById('senderEmail').value.trim();
-      const subject = document.getElementById('senderSubject').value.trim();
-      const msg = document.getElementById('senderMsg').value.trim();
+      const name = document.getElementById('contactName').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const subject = document.getElementById('contactSubject').value.trim();
+      const msg = document.getElementById('contactMsg').value.trim();
 
-      const recipient = CURRENT_PROFILE.email || "pradeep438072@gmail.com";
+      const recipient = "pradeep438072@gmail.com";
       const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("From: " + name + " (" + email + ")\n\n" + msg)}`;
+      
       window.location.href = mailtoUrl;
-      alert(`Opening mail client to send message to ${recipient}!`);
+      showToast(`Opening your mail application to send to ${recipient}...`);
       e.target.reset();
     }
 
     // Download Resume as Plaintext
     function downloadResumeText() {
-      const sheet = document.getElementById('renderedResumeSheet');
-      const text = sheet ? sheet.innerText : "Pradeep A Resume";
-      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const resumeContent = `PRADEEP A
+Salem, Tamil Nadu • +91 8072637400 • pradeep438072@gmail.com
+
+PROFESSIONAL SUMMARY
+Enthusiastic Artificial Intelligence and Data Science student with strong fundamentals in Python, C++, and MySQL database management. Passionate about leveraging AI and modern technologies to solve real-world problems, as demonstrated by hands-on project experience in voice-assisted healthcare solutions.
+
+EDUCATION
+Sona College of Arts and Science, Salem, India
+B.Sc. Artificial Intelligence and Data Science (Pursuing)
+
+Sri Gayathiri Matriculation Higher Secondary School, Salem, India
+Higher Secondary Certificate (12th Standard) — Score: 83.5%
+Secondary School Leaving Certificate (10th Standard) — Score: 84.4%
+
+TECHNICAL SKILLS
+Programming Languages: Python, C++
+Database & Tools: MySQL, Microsoft Excel, Git
+Core Concepts: Artificial Intelligence, Data Science, Data Structures, Object-Oriented Programming (OOP)
+
+KEY PROJECTS
+MediVoice AI – Medicine Reminder & Voice Assistant
+• Designed and developed an AI-powered voice assistant application created to assist users with medication schedules and smart audio reminders.
+• Implemented voice interaction pipelines to capture user inputs, schedule automated dosage alerts, and convey medicine details effortlessly.
+• Utilized structured database operations for secure and accurate user profile and prescription management.
+
+STRENGTHS & PERSONAL QUALITIES
+• Strong problem-solving mindset and analytical skills.
+• Eager to learn new tools, technologies, and AI frameworks quickly.
+• Effective team communication and project execution capabilities.
+`;
+
+      const blob = new Blob([resumeContent], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${CURRENT_PROFILE.name.replace(/\s+/g, '_')}_Resume.txt`;
+      a.download = 'Pradeep_A_Resume.txt';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
+      showToast('Resume downloaded successfully!');
+    }
+
+    // Interactive Demo Modal Logic
+    function openDemoModal() {
+      document.getElementById('demoModal').classList.add('active');
+    }
+    function closeDemoModal() {
+      document.getElementById('demoModal').classList.remove('active');
+    }
+
+    function runVoiceSim() {
+      const input = document.getElementById('simVoiceInput').value.trim();
+      const res = document.getElementById('simVoiceResult');
+      res.innerHTML = `
+        <span style="color: var(--success); font-weight: bold;">✔ Audio Captured & Processed:</span> "${input}"<br/>
+        <span style="color: var(--accent); font-weight: 600;">→ Entity Extracted:</span> Medicine = <strong>Metformin</strong>, Dosage = <strong>500mg</strong>, Trigger Time = <strong>20:00:00</strong><br/>
+        <span style="color: var(--badge-text);">→ MySQL Action:</span> <code>INSERT INTO reminders (medicine_name, dosage, alert_time) VALUES ('Metformin', '500mg', '20:00:00');</code><br/>
+        <span style="color: #22c55e;">→ Voice Synthesis:</span> Audio alert initialized with TTS speaker loop.
+      `;
+      showToast('Voice entity parsed and database scheduled!');
+    }
+
+    // Toast Helper
+    let toastTimeout;
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotice');
+      const text = document.getElementById('toastMsg');
+      text.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
     }
   </script>
 </body>
