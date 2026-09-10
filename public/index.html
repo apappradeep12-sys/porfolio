@@ -3,16 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ResumeFolio AI | Automated Resume-to-Portfolio Generator</title>
-  <meta name="description" content="Transform any PDF or DOCX resume into a modern, responsive, high-performance developer portfolio website automatically." />
+  <title>Pradeep A | Software Developer & Data Science Portfolio</title>
+  <meta name="description" content="Personal portfolio of Pradeep A - Software Developer and Data Science student specializing in Python, C++, MySQL, and AI-driven solutions." />
+  <meta name="author" content="Pradeep A" />
 
-  <!-- PDF.js & Mammoth.js for client-side document parsing -->
+  <!-- External libraries for AI Resume-to-Portfolio parsing (PDF.js & Mammoth.js) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 
   <style>
-    /* CSS Variables for Dynamic Themes */
+    /* ==========================================================
+       THEME VARIABLES & DESIGN SYSTEM
+       ========================================================== */
     :root {
+      /* Theme 1: Modern Cyan / Slate (Default) */
       --bg-body: #090d16;
       --bg-surface: #0f172a;
       --bg-card: rgba(30, 41, 59, 0.7);
@@ -27,15 +31,13 @@
       --accent-secondary: #818cf8;
       --badge-bg: rgba(56, 189, 248, 0.12);
       --badge-text: #7dd3fc;
-      --nav-bg: rgba(15, 23, 42, 0.9);
+      --nav-bg: rgba(15, 23, 42, 0.92);
       --success: #22c55e;
-      --warning: #f59e0b;
-      --danger: #ef4444;
       --radius-sm: 6px;
       --radius-md: 10px;
       --radius-lg: 16px;
       --radius-full: 9999px;
-      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
     [data-theme="violet"] {
@@ -101,7 +103,7 @@
       --accent-secondary: #6366f1;
       --badge-bg: #e0f2fe;
       --badge-text: #0369a1;
-      --nav-bg: rgba(255, 255, 255, 0.92);
+      --nav-bg: rgba(255, 255, 255, 0.94);
     }
 
     * {
@@ -112,13 +114,13 @@
 
     html {
       scroll-behavior: smooth;
-      font-family: var(--font-family);
+      font-family: var(--font);
       background-color: var(--bg-body);
       color: var(--text-main);
     }
 
     body {
-      line-height: 1.6;
+      line-height: 1.65;
       overflow-x: hidden;
       min-height: 100vh;
       background: radial-gradient(circle at 10% 10%, var(--accent-glow) 0%, transparent 45%),
@@ -126,95 +128,78 @@
                   var(--bg-body);
     }
 
-    /* Master App Shell Bar */
-    .app-top-header {
+    /* Top Sticky Header */
+    .top-header {
       position: sticky;
       top: 0;
       z-index: 1000;
       background: var(--nav-bg);
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border-color);
+      transition: background 0.3s;
     }
 
-    .app-shell-bar {
-      max-width: 1400px;
+    .nav-container {
+      max-width: 1200px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.75rem 1.25rem;
+      padding: 0.85rem 1.25rem;
       gap: 1rem;
-      flex-wrap: wrap;
     }
 
-    .app-brand {
+    .logo-brand {
       display: flex;
       align-items: center;
       gap: 0.6rem;
       text-decoration: none;
       color: var(--text-main);
       font-weight: 800;
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       letter-spacing: -0.5px;
     }
 
-    .app-brand-badge {
+    .brand-badge {
       background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
       color: #030712;
-      font-size: 0.8rem;
-      font-weight: 900;
-      padding: 0.25rem 0.5rem;
-      border-radius: var(--radius-sm);
-    }
-
-    .app-mode-tabs {
-      display: flex;
-      background: rgba(0, 0, 0, 0.25);
-      padding: 0.25rem;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-color);
-      gap: 0.25rem;
-    }
-
-    .tab-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      padding: 0.45rem 0.9rem;
-      border-radius: var(--radius-sm);
       font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
+      font-weight: 900;
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .nav-links {
       display: flex;
+      list-style: none;
+      gap: 1.3rem;
       align-items: center;
-      gap: 0.4rem;
-      transition: all 0.2s ease;
     }
 
-    .tab-btn:hover {
-      color: var(--text-main);
-      background: rgba(255, 255, 255, 0.05);
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
     }
 
-    .tab-btn.active {
-      background: var(--accent);
-      color: #030712;
-      box-shadow: 0 2px 8px var(--accent-glow);
+    .nav-links a:hover {
+      color: var(--accent);
     }
 
-    .app-actions {
+    .nav-controls {
       display: flex;
       align-items: center;
       gap: 0.6rem;
     }
 
-    /* Common Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      padding: 0.55rem 1.1rem;
+      padding: 0.55rem 1.15rem;
       font-size: 0.88rem;
       font-weight: 600;
       border-radius: var(--radius-sm);
@@ -231,8 +216,8 @@
     }
 
     .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 18px var(--accent-glow);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--accent-glow);
     }
 
     .btn-outline {
@@ -266,463 +251,29 @@
       border-color: var(--accent);
     }
 
-    /* Main App Layout */
-    .app-container {
-      max-width: 1400px;
+    /* Main Container */
+    .main-wrapper {
+      max-width: 1150px;
       margin: 0 auto;
-      padding: 1.5rem 1.25rem 4rem;
+      padding: 0 1.25rem 4rem;
     }
 
-    .view-panel {
-      display: none;
-    }
-
-    .view-panel.active {
-      display: block;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* 1. UPLOAD DASHBOARD */
-    .upload-hero {
-      text-align: center;
-      max-width: 760px;
-      margin: 1.5rem auto 2.5rem;
-    }
-
-    .upload-hero h1 {
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 0.75rem;
-      background: linear-gradient(135deg, #ffffff, var(--accent));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .upload-hero p {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-    }
-
-    .dropzone-card {
-      background: var(--bg-card);
-      border: 2px dashed var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 3.5rem 2rem;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.25s ease;
-      position: relative;
-      max-width: 820px;
-      margin: 0 auto 2rem;
-    }
-
-    .dropzone-card:hover,
-    .dropzone-card.dragover {
-      border-color: var(--accent);
-      background: var(--bg-card-hover);
-      box-shadow: 0 0 30px var(--accent-glow);
-    }
-
-    .dropzone-icon {
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      display: inline-block;
-      animation: bounce 2s infinite ease-in-out;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .dropzone-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .dropzone-subtitle {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .file-type-chips {
-      display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .chip {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-color);
-      color: var(--text-muted);
-      padding: 0.25rem 0.65rem;
-      border-radius: var(--radius-full);
-      font-size: 0.78rem;
-      font-weight: 600;
-    }
-
-    .hidden-input {
-      display: none;
-    }
-
-    /* Extraction Progress Panel */
-    .processing-panel {
-      display: none;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      max-width: 820px;
-      margin: 0 auto 2rem;
-    }
-
-    .progress-bar-wrap {
-      height: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: var(--radius-full);
-      overflow: hidden;
-      margin: 1.25rem 0;
-    }
-
-    .progress-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
-      transition: width 0.3s ease;
-    }
-
-    .progress-log {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      font-size: 0.88rem;
-      color: var(--text-muted);
-    }
-
-    .log-item {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .log-item.done {
-      color: var(--success);
-    }
-
-    .log-item.active {
-      color: var(--accent);
-      font-weight: 600;
-    }
-
-    /* Paste text alternative & Sample triggers */
-    .alternate-actions {
-      max-width: 820px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
-    .alt-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 1.25rem;
-      text-align: left;
-    }
-
-    .alt-card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.35rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .alt-card p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-    }
-
-    /* 2. ADMIN / EDIT PANEL */
-    .admin-container {
-      display: grid;
-      grid-template-columns: 240px 1fr;
-      gap: 1.5rem;
-      align-items: start;
-    }
-
-    .admin-sidebar {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 0.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-      position: sticky;
-      top: 5rem;
-    }
-
-    .admin-nav-item {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      padding: 0.6rem 0.85rem;
-      border-radius: var(--radius-sm);
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      font-weight: 500;
-      border: none;
-      background: transparent;
-      text-align: left;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .admin-nav-item:hover {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-main);
-    }
-
-    .admin-nav-item.active {
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .admin-content-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-    }
-
-    .form-section {
-      display: none;
-    }
-
-    .form-section.active {
-      display: block;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.25rem;
-      margin-top: 1.25rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .form-group.full-width {
-      grid-column: 1 / -1;
-    }
-
-    .form-label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    .form-control {
-      background: var(--bg-input);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      padding: 0.65rem 0.9rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.92rem;
-      font-family: inherit;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .form-control:focus {
-      border-color: var(--border-focus);
-      box-shadow: 0 0 0 2px var(--accent-glow);
-    }
-
-    textarea.form-control {
-      resize: vertical;
-      min-height: 90px;
-    }
-
-    .dynamic-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .dynamic-item-card {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 1.25rem;
-      position: relative;
-    }
-
-    .item-delete-btn {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      color: #f87171;
-      border-radius: var(--radius-sm);
-      padding: 0.25rem 0.6rem;
-      font-size: 0.75rem;
-      cursor: pointer;
-    }
-
-    .item-delete-btn:hover {
-      background: rgba(239, 68, 68, 0.3);
-    }
-
-    /* 3. LIVE PORTFOLIO PREVIEW & EMBED */
-    .preview-toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 0.6rem 1rem;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-
-    .device-switcher {
-      display: flex;
-      gap: 0.3rem;
-      background: rgba(0, 0, 0, 0.25);
-      padding: 0.2rem;
-      border-radius: var(--radius-sm);
-    }
-
-    .device-btn {
-      background: transparent;
-      border: none;
-      color: var(--text-muted);
-      padding: 0.35rem 0.65rem;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      font-size: 0.82rem;
-    }
-
-    .device-btn.active {
-      background: var(--bg-card);
-      color: var(--text-main);
-    }
-
-    .preview-canvas-wrapper {
-      display: flex;
-      justify-content: center;
-      transition: all 0.3s ease;
-    }
-
-    .portfolio-render-container {
-      width: 100%;
-      background: var(--bg-body);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-      overflow: hidden;
-      transition: max-width 0.3s ease;
-    }
-
-    .portfolio-render-container.tablet {
-      max-width: 768px;
-    }
-
-    .portfolio-render-container.mobile {
-      max-width: 420px;
-    }
-
-    /* PORTFOLIO STYLES (Rendered inside preview) */
-    .portfolio-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: var(--nav-bg);
-      backdrop-filter: blur(12px);
+    .section {
+      padding: 5rem 0;
       border-bottom: 1px solid var(--border-color);
     }
 
-    .portfolio-nav {
-      max-width: 1150px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 1.5rem;
-    }
-
-    .portfolio-logo {
-      font-size: 1.25rem;
+    .section-title {
+      font-size: 2rem;
       font-weight: 800;
-      text-decoration: none;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .portfolio-nav-links {
-      display: flex;
-      list-style: none;
-      gap: 1.25rem;
-    }
-
-    .portfolio-nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .portfolio-nav-links a:hover {
-      color: var(--accent);
-    }
-
-    .portfolio-main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    .p-section {
-      padding: 4.5rem 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .p-section-title {
-      font-size: 1.9rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
       letter-spacing: -0.5px;
       display: flex;
       align-items: center;
       gap: 0.75rem;
     }
 
-    .p-section-title::before {
+    .section-title::before {
       content: "";
       width: 5px;
       height: 24px;
@@ -731,7 +282,7 @@
       display: inline-block;
     }
 
-    .p-section-sub {
+    .section-subtitle {
       color: var(--text-muted);
       font-size: 1rem;
       margin-bottom: 2.5rem;
@@ -739,18 +290,18 @@
     }
 
     /* Hero Section */
-    .p-hero {
-      padding: 5rem 0 4rem;
+    .hero-section {
+      padding: 5.5rem 0 4rem;
     }
 
-    .p-hero-grid {
+    .hero-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 2.5rem;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 3rem;
       align-items: center;
     }
 
-    .p-hero-badge {
+    .status-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -761,52 +312,61 @@
       font-size: 0.82rem;
       font-weight: 600;
       border: 1px solid rgba(56, 189, 248, 0.25);
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
     }
 
-    .p-hero-name {
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--success);
+    }
+
+    .hero-name {
+      font-size: clamp(2.5rem, 5vw, 4rem);
       font-weight: 900;
       line-height: 1.15;
-      letter-spacing: -1px;
+      letter-spacing: -1.5px;
       margin-bottom: 0.75rem;
       background: linear-gradient(135deg, #ffffff, var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .p-hero-role {
-      font-size: 1.3rem;
+    .hero-role {
+      font-size: 1.35rem;
       color: var(--accent);
       font-weight: 600;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.25rem;
     }
 
-    .p-hero-bio {
+    .hero-bio {
       color: var(--text-muted);
       font-size: 1.05rem;
-      line-height: 1.7;
+      line-height: 1.75;
       margin-bottom: 2rem;
     }
 
-    .p-hero-actions {
+    .hero-actions {
       display: flex;
       gap: 0.85rem;
       flex-wrap: wrap;
     }
 
-    .p-avatar-card {
+    .avatar-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 2rem;
+      padding: 2.25rem;
       text-align: center;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      position: relative;
     }
 
-    .p-avatar-circle {
-      width: 110px;
-      height: 110px;
+    .avatar-circle {
+      width: 120px;
+      height: 120px;
       margin: 0 auto 1.25rem;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--bg-surface), var(--bg-card));
@@ -814,72 +374,73 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.8rem;
-      box-shadow: 0 0 25px var(--accent-glow);
+      font-size: 3rem;
+      box-shadow: 0 0 30px var(--accent-glow);
     }
 
-    .p-contact-chips {
+    .contact-chips {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 1.25rem;
+      gap: 0.6rem;
+      margin-top: 1.5rem;
       text-align: left;
     }
 
-    .p-chip-row {
+    .chip-item {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      padding: 0.45rem 0.75rem;
+      gap: 0.65rem;
+      padding: 0.5rem 0.85rem;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-sm);
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
       word-break: break-all;
     }
 
     /* Skills Grid */
-    .skills-cluster {
+    .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.25rem;
+      gap: 1.5rem;
     }
 
-    .skill-box {
+    .card-box {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
-      padding: 1.5rem;
-      transition: all 0.2s ease;
+      padding: 1.75rem;
+      transition: all 0.25s ease;
     }
 
-    .skill-box:hover {
+    .card-box:hover {
       border-color: var(--accent);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     }
 
-    .skill-box-title {
-      font-size: 1rem;
+    .card-title {
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--accent);
-      margin-bottom: 0.85rem;
+      margin-bottom: 1rem;
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
 
-    .skill-tags {
+    .pill-cloud {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.55rem;
     }
 
-    .skill-pill {
-      background: rgba(56, 189, 248, 0.08);
+    .tech-pill {
+      background: var(--badge-bg);
       border: 1px solid var(--border-color);
-      color: var(--text-main);
-      padding: 0.35rem 0.75rem;
+      color: var(--badge-text);
+      padding: 0.35rem 0.8rem;
       border-radius: var(--radius-sm);
       font-size: 0.85rem;
       font-weight: 500;
@@ -889,14 +450,14 @@
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
+      gap: 1.75rem;
     }
 
-    .p-card {
+    .project-card {
       background: var(--bg-card);
       border: 1px solid var(--border-color);
       border-radius: var(--radius-lg);
-      padding: 1.75rem;
+      padding: 2rem;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -904,39 +465,45 @@
       transition: all 0.25s ease;
     }
 
-    .p-card:hover {
+    .project-card:hover {
       border-color: var(--accent);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     }
 
-    .p-card-header {
-      margin-bottom: 0.75rem;
+    .project-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
     }
 
-    .p-card-title {
-      font-size: 1.3rem;
-      font-weight: 700;
+    .project-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
       color: #ffffff;
-      margin-bottom: 0.4rem;
     }
 
-    .p-card-desc {
+    .project-desc {
       color: var(--text-muted);
       font-size: 0.95rem;
-      line-height: 1.6;
+      line-height: 1.65;
       margin-bottom: 1.25rem;
     }
 
-    .p-features-list {
+    .features-list {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
-      margin-bottom: 1.25rem;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
     }
 
-    .p-features-list li {
+    .features-list li {
       font-size: 0.88rem;
       color: #cbd5e1;
       display: flex;
@@ -944,31 +511,26 @@
       gap: 0.5rem;
     }
 
-    .p-features-list li::before {
+    .features-list li::before {
       content: "✦";
       color: var(--accent);
       font-size: 0.8rem;
       margin-top: 0.2rem;
     }
 
-    .p-card-footer {
+    .project-footer {
       margin-top: auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 0.75rem;
+      gap: 0.85rem;
       padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
-    .p-card-links {
-      display: flex;
-      gap: 0.6rem;
-    }
-
-    /* Timelines (Experience & Education) */
-    .p-timeline {
+    /* Timelines */
+    .timeline {
       position: relative;
       padding-left: 2rem;
       border-left: 2px solid var(--border-color);
@@ -984,7 +546,7 @@
     .timeline-dot {
       position: absolute;
       left: calc(-2rem - 6px);
-      top: 0.35rem;
+      top: 0.4rem;
       width: 10px;
       height: 10px;
       border-radius: 50%;
@@ -992,48 +554,8 @@
       box-shadow: 0 0 10px var(--accent);
     }
 
-    .t-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin-bottom: 0.25rem;
-    }
-
-    .t-subtitle {
-      color: var(--accent);
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-    }
-
-    .t-meta {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 0.75rem;
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-    }
-
-    .t-bullets {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      color: #cbd5e1;
-      font-size: 0.92rem;
-    }
-
-    .t-bullets li::before {
-      content: "•";
-      color: var(--accent);
-      font-weight: bold;
-      display: inline-block;
-      width: 1em;
-    }
-
-    /* Original Resume Box */
-    .resume-replica-sheet {
+    /* Resume Document Sheet */
+    .resume-sheet {
       background: #ffffff;
       color: #0f172a;
       border-radius: var(--radius-md);
@@ -1043,7 +565,7 @@
       line-height: 1.6;
     }
 
-    .resume-replica-sheet h2 {
+    .resume-sheet h2 {
       font-size: 1.8rem;
       color: #0f172a;
       border-bottom: 2px solid #0284c7;
@@ -1051,7 +573,7 @@
       margin-bottom: 1rem;
     }
 
-    .resume-replica-sheet h3 {
+    .resume-sheet h3 {
       font-size: 1.05rem;
       color: #0369a1;
       text-transform: uppercase;
@@ -1061,92 +583,157 @@
       padding-bottom: 0.2rem;
     }
 
-    /* Export & Share Modal / Panel */
-    .export-grid {
+    /* Contact Grid */
+    .contact-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.25rem;
-      max-width: 900px;
-      margin: 1.5rem auto;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 2rem;
     }
 
-    .export-card {
+    .contact-link-card {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.2rem;
       background: var(--bg-card);
       border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 1.75rem;
-      text-align: center;
+      border-radius: var(--radius-md);
+      transition: all 0.2s;
+    }
+
+    .contact-link-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .form-group {
       display: flex;
       flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-control {
+      background: var(--bg-input);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.7rem 0.9rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-control:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 2px var(--accent-glow);
+    }
+
+    /* Modal for AI Generator */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      z-index: 2000;
       align-items: center;
-      gap: 0.75rem;
+      justify-content: center;
+      padding: 1.25rem;
     }
 
-    .export-card-icon {
-      font-size: 2.5rem;
-      margin-bottom: 0.25rem;
+    .modal-overlay.active {
+      display: flex;
     }
 
-    /* Responsive Queries */
-    @media (max-width: 900px) {
-      .app-shell-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .app-mode-tabs {
-        overflow-x: auto;
-      }
-      .admin-container {
+    .modal-dialog {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2.25rem;
+      position: relative;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .dropzone-box {
+      border: 2px dashed var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      cursor: pointer;
+      margin: 1.25rem 0;
+      transition: all 0.2s;
+    }
+
+    .dropzone-box:hover, .dropzone-box.dragover {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.05);
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .hero-grid, .contact-grid {
         grid-template-columns: 1fr;
       }
-      .admin-sidebar {
-        position: static;
-        flex-direction: row;
-        overflow-x: auto;
-      }
-      .p-hero-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-      .p-hero-actions {
-        justify-content: center;
-      }
-      .alternate-actions {
-        grid-template-columns: 1fr;
+      .nav-links {
+        display: none;
       }
     }
   </style>
 </head>
 <body data-theme="cyan" data-mode="dark">
 
-  <!-- MASTER APP HEADER BAR -->
-  <header class="app-top-header">
-    <div class="app-shell-bar">
-      <a href="#" class="app-brand" onclick="switchMainView('upload'); return false;">
-        <span class="app-brand-badge">AI</span>
-        <span>ResumeFolio Generator</span>
+  <!-- TOP HEADER -->
+  <header class="top-header">
+    <div class="nav-container">
+      <a href="#home" class="logo-brand">
+        <span class="brand-badge">PA</span>
+        <span>Pradeep A</span>
       </a>
 
-      <!-- Primary Mode Tabs -->
-      <nav class="app-mode-tabs">
-        <button class="tab-btn active" id="tab-upload" onclick="switchMainView('upload')">
-          <span>⚡</span> Upload Resume
-        </button>
-        <button class="tab-btn" id="tab-edit" onclick="switchMainView('edit')">
-          <span>🛠️</span> Edit Details
-        </button>
-        <button class="tab-btn" id="tab-preview" onclick="switchMainView('preview')">
-          <span>👁️</span> Live Portfolio
-        </button>
-        <button class="tab-btn" id="tab-export" onclick="switchMainView('export')">
-          <span>🚀</span> Export & Share
-        </button>
-      </nav>
+      <!-- Desktop Nav -->
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
 
-      <!-- Quick Action Toggles -->
-      <div class="app-actions">
-        <!-- Theme Picker -->
-        <select id="themeSelector" class="btn-icon" style="padding: 0.35rem 0.6rem; font-size: 0.85rem; background: var(--bg-card); color: var(--text-main);" title="Select Visual Palette">
+      <!-- Action Controls -->
+      <div class="nav-controls">
+        <!-- AI Generator Modal Trigger -->
+        <button class="btn btn-outline" onclick="openGeneratorModal()" title="Upload a resume to automatically regenerate this portfolio">
+          <span>✨</span> AI Resume Generator
+        </button>
+
+        <!-- Theme Selector -->
+        <select id="themeSelector" class="btn-icon" style="background: var(--bg-card); color: var(--text-main); font-size: 0.85rem;" title="Select Color Palette">
           <option value="cyan">🎨 Cyan / Slate</option>
           <option value="violet">💜 Violet / Midnight</option>
           <option value="emerald">🌿 Emerald / Tech</option>
@@ -1154,339 +741,392 @@
         </select>
 
         <!-- Dark / Light Toggle -->
-        <button class="btn-icon" id="modeToggleBtn" onclick="toggleColorMode()" title="Toggle Dark/Light Mode">
+        <button class="btn-icon" onclick="toggleColorMode()" id="modeToggleBtn" title="Toggle Dark/Light Mode">
           🌙
-        </button>
-
-        <!-- Quick Deploy / Download -->
-        <button class="btn btn-primary" onclick="downloadStandalonePortfolio()" title="Download generated static single-file portfolio HTML">
-          <span>📥</span> Download HTML
         </button>
       </div>
     </div>
   </header>
 
-  <!-- MAIN APP CONTAINER -->
-  <main class="app-container">
+  <!-- MAIN PORTFOLIO -->
+  <main class="main-wrapper" id="portfolioView">
 
-    <!-- VIEW 1: UPLOAD & PARSER DASHBOARD -->
-    <section id="view-upload" class="view-panel active">
-      <div class="upload-hero">
-        <h1>Transform Your Resume into a Live Portfolio</h1>
-        <p>
-          Upload your resume in <strong>PDF</strong> or <strong>DOCX</strong> format. Our intelligent parser automatically extracts your projects, skills, education, and experience to generate a bespoke developer website in seconds.
+    <!-- 1. HOME / HERO SECTION -->
+    <section id="home" class="hero-section">
+      <div class="hero-grid">
+        <div>
+          <div class="status-badge" id="dyn-badge">
+            <span class="status-dot"></span>
+            <span>Available for Internships & Entry-level Opportunities</span>
+          </div>
+
+          <h1 class="hero-name" id="dyn-name">Pradeep A</h1>
+          <div class="hero-role" id="dyn-title">Software Developer & Data Science Student</div>
+          <p class="hero-bio" id="dyn-bio">
+            Enthusiastic and motivated Software Developer & Data Science student with strong fundamentals in Python, C++, and MySQL database management. Passionate about leveraging AI and modern technologies to solve real-world problems.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">⚡ View My Projects</a>
+            <a href="#contact" class="btn btn-outline">✉ Contact Me</a>
+            <a href="#resume" class="btn btn-outline">📄 Download Resume</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="avatar-card">
+            <div class="avatar-circle">👨‍💻</div>
+            <h3 style="font-size: 1.3rem; font-weight: 700;" id="dyn-card-name">Pradeep A</h3>
+            <p style="color: var(--accent); font-size: 0.9rem; margin-bottom: 1rem;" id="dyn-card-role">Software Developer & Data Science</p>
+            <div class="contact-chips">
+              <div class="chip-item">
+                <span>📍</span> <span id="dyn-card-location">Salem, Tamil Nadu, India</span>
+              </div>
+              <div class="chip-item">
+                <span>📧</span> <span id="dyn-card-email">pradeep438072@gmail.com</span>
+              </div>
+              <div class="chip-item">
+                <span>📱</span> <span id="dyn-card-phone">+91 8072637400</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ABOUT ME SECTION -->
+    <section id="about" class="section">
+      <h2 class="section-title">About Me</h2>
+      <p class="section-subtitle">Professional profile, background, and personal qualities</p>
+
+      <div class="card-box" style="margin-bottom: 2rem;">
+        <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main);" id="dyn-summary">
+          "Enthusiastic and motivated Software Developer & Data Science student with strong fundamentals in Python, C++, and MySQL database management. Passionate about leveraging AI and modern technologies to solve real-world problems, as demonstrated by hands-on project experience in voice-assisted healthcare solutions. Eager to contribute to dynamic software teams through dedication, continuous learning, and structured software architecture."
         </p>
       </div>
 
-      <!-- File Upload Dropzone -->
-      <div class="dropzone-card" id="dropzone" onclick="document.getElementById('fileInput').click()">
-        <input type="file" id="fileInput" class="hidden-input" accept=".pdf,.docx,.doc,.txt" onchange="handleFileSelected(event)" />
-        <div class="dropzone-icon">📄</div>
-        <h2 class="dropzone-title">Click to browse or drag & drop your resume</h2>
-        <p class="dropzone-subtitle">Supports PDF, DOCX (Word), or TXT format. Client-side & private.</p>
-        <div class="file-type-chips">
-          <span class="chip">PDF Documents</span>
-          <span class="chip">DOCX / Word</span>
-          <span class="chip">No Data Uploaded to External Servers</span>
+      <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1.25rem; color: var(--accent);">Key Strengths & Competencies</h3>
+      <div class="skills-grid" id="dyn-strengths">
+        <div class="card-box" style="padding: 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
+          <span style="color: var(--success); font-size: 1.2rem;">✔</span>
+          <span>Strong problem-solving mindset and analytical thinking</span>
         </div>
-      </div>
-
-      <!-- Live Extraction Progress Panel -->
-      <div class="processing-panel" id="processingPanel">
-        <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-          <span id="processStatusIcon">⏳</span>
-          <span id="processStatusTitle">Analyzing resume layout...</span>
-        </h3>
-        <div class="progress-bar-wrap">
-          <div class="progress-bar-fill" id="progressBarFill"></div>
+        <div class="card-box" style="padding: 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
+          <span style="color: var(--success); font-size: 1.2rem;">✔</span>
+          <span>Eager to learn new tools, technologies, and software frameworks quickly</span>
         </div>
-        <div class="progress-log" id="progressLog">
-          <div class="log-item active">Reading document buffers and character streams...</div>
-        </div>
-      </div>
-
-      <!-- Quick Sample & Paste Alternatives -->
-      <div class="alternate-actions">
-        <div class="alt-card">
-          <h3><span>🧪</span> Test with Sample Resume</h3>
-          <p>Instantly test the portfolio generator using verified sample student / developer data with 1 click.</p>
-          <button class="btn btn-outline" onclick="loadSampleResume('pradeep')">
-            Load Pradeep A. (Fullstack & AI)
-          </button>
-        </div>
-
-        <div class="alt-card">
-          <h3><span>📋</span> Paste Plain Text Resume</h3>
-          <p>Have plain text from LinkedIn, Word, or Google Docs? Paste directly into our raw NLP parser.</p>
-          <button class="btn btn-outline" onclick="openPasteModal()">
-            Paste Resume Text
-          </button>
+        <div class="card-box" style="padding: 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
+          <span style="color: var(--success); font-size: 1.2rem;">✔</span>
+          <span>Effective team communication and disciplined project delivery</span>
         </div>
       </div>
     </section>
 
-    <!-- VIEW 2: ADMIN & EDIT PANEL -->
-    <section id="view-edit" class="view-panel">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
-        <div>
-          <h1 style="font-size: 1.7rem; font-weight: 800;">Candidate Portfolio Editor</h1>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">Review, refine, or add details extracted from your resume. Changes update the portfolio immediately.</p>
+    <!-- 3. TECHNICAL SKILLS SECTION -->
+    <section id="skills" class="section">
+      <h2 class="section-title">Technical Skills</h2>
+      <p class="section-subtitle">Verified programming languages, databases, tools, and technical paradigms</p>
+
+      <div class="skills-grid" id="dyn-skills-grid">
+        <div class="card-box">
+          <h3 class="card-title"><span>💻</span> Programming Languages</h3>
+          <div class="pill-cloud">
+            <span class="tech-pill">Python</span>
+            <span class="tech-pill">C++</span>
+          </div>
         </div>
-        <div style="display: flex; gap: 0.6rem;">
-          <button class="btn btn-outline" onclick="resetToSample()">Reset to Default</button>
-          <button class="btn btn-primary" onclick="switchMainView('preview')">👁️ View Live Portfolio</button>
+
+        <div class="card-box">
+          <h3 class="card-title"><span>🗄️</span> Databases & Storage</h3>
+          <div class="pill-cloud">
+            <span class="tech-pill">MySQL</span>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <h3 class="card-title"><span>🛠️</span> Tools & Technologies</h3>
+          <div class="pill-cloud">
+            <span class="tech-pill">Git</span>
+            <span class="tech-pill">Microsoft Excel</span>
+          </div>
+        </div>
+
+        <div class="card-box">
+          <h3 class="card-title"><span>🧠</span> Core Computer Science Concepts</h3>
+          <div class="pill-cloud">
+            <span class="tech-pill">Data Structures</span>
+            <span class="tech-pill">Object-Oriented Programming (OOP)</span>
+            <span class="tech-pill">AI Integration</span>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="admin-container">
-        <!-- Sidebar Navigation -->
-        <aside class="admin-sidebar">
-          <button class="admin-nav-item active" onclick="switchAdminSection('personal')">
-            <span>👤</span> Personal Info
-          </button>
-          <button class="admin-nav-item" onclick="switchAdminSection('summary')">
-            <span>📝</span> Summary & Bio
-          </button>
-          <button class="admin-nav-item" onclick="switchAdminSection('skills')">
-            <span>💻</span> Skills & Tools
-          </button>
-          <button class="admin-nav-item" onclick="switchAdminSection('projects')">
-            <span>🚀</span> Projects
-          </button>
-          <button class="admin-nav-item" onclick="switchAdminSection('experience')">
-            <span>💼</span> Experience
-          </button>
-          <button class="admin-nav-item" onclick="switchAdminSection('education')">
-            <span>🎓</span> Education
-          </button>
-          <button class="admin-nav-item" onclick="switchAdminSection('social')">
-            <span>🔗</span> Links & Contact
-          </button>
-        </aside>
+    <!-- 4. KEY PROJECTS SECTION -->
+    <section id="projects" class="section">
+      <h2 class="section-title">Key Projects</h2>
+      <p class="section-subtitle">Software implementations and demonstrated engineering capabilities</p>
 
-        <!-- Dynamic Form Body -->
-        <div class="admin-content-card">
-          <!-- 1. Personal Info -->
-          <div class="form-section active" id="form-personal">
-            <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Personal & Header Information</h2>
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label">Full Name</label>
-                <input type="text" id="edit-name" class="form-control" oninput="updatePortfolioField('name', this.value)" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Professional Title / Headline</label>
-                <input type="text" id="edit-title" class="form-control" oninput="updatePortfolioField('title', this.value)" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Location (City, State/Country)</label>
-                <input type="text" id="edit-location" class="form-control" oninput="updatePortfolioField('location', this.value)" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Availability / Status Badge</label>
-                <input type="text" id="edit-badge" class="form-control" oninput="updatePortfolioField('badge', this.value)" />
-              </div>
-            </div>
-          </div>
-
-          <!-- 2. Summary -->
-          <div class="form-section" id="form-summary">
-            <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Professional Profile & Summary</h2>
-            <div class="form-group full-width">
-              <label class="form-label">About Me / Professional Objective</label>
-              <textarea id="edit-summary" class="form-control" rows="5" oninput="updatePortfolioField('summary', this.value)"></textarea>
-            </div>
-          </div>
-
-          <!-- 3. Skills -->
-          <div class="form-section" id="form-skills">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-              <h2 style="font-size: 1.25rem; font-weight: 700;">Categorized Technical Skills</h2>
-              <button class="btn btn-outline" onclick="addSkillCategory()">+ Add Category</button>
-            </div>
-            <div id="skillsListContainer" class="dynamic-list"></div>
-          </div>
-
-          <!-- 4. Projects -->
-          <div class="form-section" id="form-projects">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-              <h2 style="font-size: 1.25rem; font-weight: 700;">Featured Projects</h2>
-              <button class="btn btn-outline" onclick="addProjectItem()">+ Add Project</button>
-            </div>
-            <div id="projectsListContainer" class="dynamic-list"></div>
-          </div>
-
-          <!-- 5. Experience -->
-          <div class="form-section" id="form-experience">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-              <h2 style="font-size: 1.25rem; font-weight: 700;">Work Experience & Internships</h2>
-              <button class="btn btn-outline" onclick="addExperienceItem()">+ Add Position</button>
-            </div>
-            <div id="experienceListContainer" class="dynamic-list"></div>
-          </div>
-
-          <!-- 6. Education -->
-          <div class="form-section" id="form-education">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-              <h2 style="font-size: 1.25rem; font-weight: 700;">Education & Academic History</h2>
-              <button class="btn btn-outline" onclick="addEducationItem()">+ Add Degree</button>
-            </div>
-            <div id="educationListContainer" class="dynamic-list"></div>
-          </div>
-
-          <!-- 7. Social & Contact -->
-          <div class="form-section" id="form-social">
-            <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">Contact Channels & Social Profiles</h2>
-            <div class="form-grid">
-              <div class="form-group">
-                <label class="form-label">Email Address</label>
-                <input type="email" id="edit-email" class="form-control" oninput="updatePortfolioField('email', this.value)" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Phone Number / WhatsApp</label>
-                <input type="text" id="edit-phone" class="form-control" oninput="updatePortfolioField('phone', this.value)" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">GitHub URL</label>
-                <input type="url" id="edit-github" class="form-control" placeholder="https://github.com/..." oninput="updatePortfolioField('github', this.value)" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">LinkedIn URL</label>
-                <input type="url" id="edit-linkedin" class="form-control" placeholder="https://linkedin.com/in/..." oninput="updatePortfolioField('linkedin', this.value)" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Portfolio / Personal Website</label>
-                <input type="url" id="edit-website" class="form-control" placeholder="https://..." oninput="updatePortfolioField('website', this.value)" />
-              </div>
+      <div class="projects-grid" id="dyn-projects-grid">
+        <div class="project-card">
+          <span class="status-badge" style="margin-bottom: 0.5rem; width: fit-content;">AI Healthcare</span>
+          <h3 class="project-title">MediVoice AI – Medicine Reminder & Voice Assistant</h3>
+          <p class="project-desc">
+            Designed and developed an AI-powered voice assistant application created to assist users with medication schedules and smart audio reminders.
+          </p>
+          <ul class="features-list">
+            <li>Voice interaction pipelines to capture user inputs, schedule automated dosage alerts, and convey medicine details effortlessly</li>
+            <li>Schedule triggers for accurate timing and timely audio delivery for patient prescription adherence</li>
+            <li>Structured database operations for secure and accurate user profile and prescription management</li>
+          </ul>
+          <div class="project-footer">
+            <div class="pill-cloud">
+              <span class="tech-pill" style="font-size: 0.78rem;">Python</span>
+              <span class="tech-pill" style="font-size: 0.78rem;">AI Integration</span>
+              <span class="tech-pill" style="font-size: 0.78rem;">MySQL</span>
+              <span class="tech-pill" style="font-size: 0.78rem;">Voice Pipeline</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- VIEW 3: LIVE PORTFOLIO PREVIEW -->
-    <section id="view-preview" class="view-panel">
-      <!-- Preview Responsive Controls -->
-      <div class="preview-toolbar">
-        <div style="display: flex; align-items: center; gap: 0.6rem;">
-          <span style="font-weight: 600; font-size: 0.9rem;">Preview Device:</span>
-          <div class="device-switcher">
-            <button class="device-btn active" id="dev-desktop" onclick="setPreviewDevice('desktop')">💻 Desktop</button>
-            <button class="device-btn" id="dev-tablet" onclick="setPreviewDevice('tablet')">📱 Tablet</button>
-            <button class="device-btn" id="dev-mobile" onclick="setPreviewDevice('mobile')">📲 Mobile</button>
+    <!-- 5. EDUCATION TIMELINE SECTION -->
+    <section id="education" class="section">
+      <h2 class="section-title">Education & Academic Background</h2>
+      <p class="section-subtitle">Academic timeline, institutions, and scholastic achievements</p>
+
+      <div class="timeline" id="dyn-education-timeline">
+        <div class="timeline-node">
+          <div class="timeline-dot"></div>
+          <div class="card-box">
+            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.25rem;">Sona College of Arts and Science</h3>
+            <div style="color: var(--accent); font-weight: 600; margin-bottom: 0.35rem;">Bachelor's Degree (Pursuing)</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">📍 Salem, India</div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">
+              Focusing on Software Development, Data Science, Data Structures, Object-Oriented Programming, and Database Management Systems.
+            </p>
           </div>
         </div>
 
-        <div style="display: flex; gap: 0.6rem;">
-          <button class="btn btn-outline" onclick="switchMainView('edit')">✏️ Edit Details</button>
-          <button class="btn btn-primary" onclick="downloadStandalonePortfolio()">📥 Export HTML File</button>
+        <div class="timeline-node">
+          <div class="timeline-dot"></div>
+          <div class="card-box">
+            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.25rem;">Sri Gayathiri Matriculation Higher Secondary School</h3>
+            <div style="color: var(--accent); font-weight: 600; margin-bottom: 0.35rem;">Higher Secondary Certificate (12th Standard)</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+              📍 Salem, India • <span style="color: var(--success); font-weight: 700;">★ 83.5% Distinction</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">
+              Academic excellence in Mathematics, Physics, Chemistry, and Computer Science curricula.
+            </p>
+          </div>
         </div>
-      </div>
 
-      <!-- Preview Canvas -->
-      <div class="preview-canvas-wrapper">
-        <div class="portfolio-render-container" id="portfolioContainer">
-          <!-- Dynamically populated portfolio layout -->
+        <div class="timeline-node">
+          <div class="timeline-dot"></div>
+          <div class="card-box">
+            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.25rem;">Sri Gayathiri Matriculation Higher Secondary School</h3>
+            <div style="color: var(--accent); font-weight: 600; margin-bottom: 0.35rem;">Secondary School Leaving Certificate (10th Standard)</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+              📍 Salem, India • <span style="color: var(--success); font-weight: 700;">★ 84.4% Distinction</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">
+              Distinction honors throughout foundational science and mathematics education.
+            </p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- VIEW 4: EXPORT & DEPLOYMENT -->
-    <section id="view-export" class="view-panel">
-      <div class="upload-hero">
-        <h1>Export & Share Your Portfolio</h1>
-        <p>Deploy your resume-generated portfolio to the web, save as a static standalone HTML file, or export JSON data.</p>
+    <!-- 6. RESUME DOCUMENT SHEET -->
+    <section id="resume" class="section">
+      <h2 class="section-title">Resume Document</h2>
+      <p class="section-subtitle">Verified resume sheet generated directly from candidate information</p>
+
+      <div class="resume-sheet" id="renderedResumeSheet">
+        <h2 id="resume-sheet-name">PRADEEP A</h2>
+        <p style="color: #475569; font-size: 0.88rem; margin-bottom: 1.25rem;" id="resume-sheet-contact">
+          Salem, Tamil Nadu, India &nbsp;•&nbsp; +91 8072637400 &nbsp;•&nbsp; pradeep438072@gmail.com
+        </p>
+
+        <h3>PROFESSIONAL SUMMARY</h3>
+        <p id="resume-sheet-summary">
+          Enthusiastic and motivated Software Developer & Data Science student with strong fundamentals in Python, C++, and MySQL database management. Passionate about leveraging AI and modern technologies to solve real-world problems, as demonstrated by hands-on project experience in voice-assisted healthcare solutions.
+        </p>
+
+        <h3>TECHNICAL SKILLS</h3>
+        <div id="resume-sheet-skills">
+          <p><strong>Programming Languages:</strong> Python, C++</p>
+          <p><strong>Database & Storage:</strong> MySQL</p>
+          <p><strong>Tools & Technologies:</strong> Git, Microsoft Excel</p>
+          <p><strong>Core Concepts:</strong> Data Structures, OOP, AI Integration</p>
+        </div>
+
+        <h3>KEY PROJECTS</h3>
+        <div id="resume-sheet-projects">
+          <p style="font-weight: bold; margin-top: 0.5rem;">MediVoice AI – Medicine Reminder & Voice Assistant</p>
+          <p>Designed and developed an AI-powered voice assistant application created to assist users with medication schedules and smart audio reminders.</p>
+          <ul style="padding-left: 1.25rem; margin-top: 0.25rem;">
+            <li>Voice interaction pipelines to capture user inputs, schedule automated dosage alerts, and convey medicine details effortlessly</li>
+            <li>Schedule triggers for accurate timing and timely audio delivery for patient prescription adherence</li>
+            <li>Structured database operations for secure and accurate user profile and prescription management</li>
+          </ul>
+        </div>
+
+        <h3>EDUCATION</h3>
+        <div id="resume-sheet-education">
+          <p style="margin-top: 0.4rem;"><strong>Sona College of Arts and Science</strong> — Bachelor's Degree (Pursuing), Salem</p>
+          <p style="margin-top: 0.4rem;"><strong>Sri Gayathiri Matriculation Higher Secondary School</strong> — 12th Standard (<strong>83.5% Distinction</strong>), Salem</p>
+          <p style="margin-top: 0.4rem;"><strong>Sri Gayathiri Matriculation Higher Secondary School</strong> — 10th Standard (<strong>84.4% Distinction</strong>), Salem</p>
+        </div>
       </div>
 
-      <div class="export-grid">
-        <div class="export-card">
-          <div class="export-card-icon">📦</div>
-          <h3 style="font-size: 1.15rem; font-weight: 700;">Standalone HTML File</h3>
-          <p style="color: var(--text-muted); font-size: 0.9rem;">
-            Download a single, self-contained HTML5 file with embedded responsive styles and scripts. Ready to host on Vercel, Netlify, or GitHub Pages.
-          </p>
-          <button class="btn btn-primary" style="width: 100%; margin-top: auto;" onclick="downloadStandalonePortfolio()">
-            Download index.html
-          </button>
+      <div style="margin-top: 1.5rem; display: flex; gap: 0.85rem; flex-wrap: wrap;">
+        <button class="btn btn-primary" onclick="downloadResumeText()">📥 Save Plaintext Resume</button>
+        <button class="btn btn-outline" onclick="window.print()">🖨️ Print / Save PDF</button>
+      </div>
+    </section>
+
+    <!-- 7. CONTACT SECTION -->
+    <section id="contact" class="section">
+      <h2 class="section-title">Get In Touch</h2>
+      <p class="section-subtitle">Reach out directly for internships, collaborations, or career opportunities</p>
+
+      <div class="contact-grid">
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <a href="mailto:pradeep438072@gmail.com" class="contact-link-card" id="contact-link-email">
+            <span style="font-size: 1.6rem;">✉</span>
+            <div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Direct Email</div>
+              <div style="font-weight: 700;" id="contact-val-email">pradeep438072@gmail.com</div>
+            </div>
+          </a>
+
+          <a href="tel:+918072637400" class="contact-link-card" id="contact-link-phone">
+            <span style="font-size: 1.6rem;">📞</span>
+            <div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Phone & WhatsApp</div>
+              <div style="font-weight: 700;" id="contact-val-phone">+91 8072637400</div>
+            </div>
+          </a>
+
+          <div class="contact-link-card">
+            <span style="font-size: 1.6rem;">📍</span>
+            <div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Location</div>
+              <div style="font-weight: 700;" id="contact-val-location">Salem, Tamil Nadu, India</div>
+            </div>
+          </div>
         </div>
 
-        <div class="export-card">
-          <div class="export-card-icon">🗂️</div>
-          <h3 style="font-size: 1.15rem; font-weight: 700;">JSON Profile Data</h3>
-          <p style="color: var(--text-muted); font-size: 0.9rem;">
-            Export the extracted structured JSON payload to backup your data or import it anytime into another instance.
-          </p>
-          <button class="btn btn-outline" style="width: 100%; margin-top: auto;" onclick="exportPortfolioJSON()">
-            Download JSON
+        <!-- Working Direct Mail Form -->
+        <form class="card-box" onsubmit="handleContactSubmit(event)">
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem;">Send Direct Message</h3>
+          <div class="form-group">
+            <label style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Your Name</label>
+            <input type="text" id="senderName" class="form-control" placeholder="e.g. Recruiter / Hiring Team" required />
+          </div>
+          <div class="form-group">
+            <label style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Your Email</label>
+            <input type="email" id="senderEmail" class="form-control" placeholder="e.g. hr@company.com" required />
+          </div>
+          <div class="form-group">
+            <label style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Subject</label>
+            <input type="text" id="senderSubject" class="form-control" placeholder="Internship / Job Opportunity" required />
+          </div>
+          <div class="form-group">
+            <label style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600;">Message</label>
+            <textarea id="senderMsg" class="form-control" rows="3" placeholder="Hello Pradeep, we reviewed your profile..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;">
+            🚀 Send Message to Pradeep
           </button>
-        </div>
-
-        <div class="export-card">
-          <div class="export-card-icon">🖨️</div>
-          <h3 style="font-size: 1.15rem; font-weight: 700;">Print / Save as PDF</h3>
-          <p style="color: var(--text-muted); font-size: 0.9rem;">
-            Print the portfolio or save as a polished PDF document formatted specifically for clean printing.
-          </p>
-          <button class="btn btn-outline" style="width: 100%; margin-top: auto;" onclick="window.print()">
-            Print / PDF
-          </button>
-        </div>
+        </form>
       </div>
     </section>
 
   </main>
 
-  <!-- PASTE TEXT RESUME MODAL -->
-  <div id="pasteModal" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); z-index: 2000; align-items: center; justify-content: center; padding: 1rem;">
-    <div style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem; max-width: 650px; width: 100%; max-height: 90vh; overflow-y: auto;">
-      <h2 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.5rem;">Paste Resume Text</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
-        Paste your resume text below. Our heuristic parser will scan sections, contacts, projects, and skills.
+  <!-- FOOTER -->
+  <footer style="background: rgba(0, 0, 0, 0.4); border-top: 1px solid var(--border-color); padding: 3rem 1.25rem; text-align: center;">
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
+      <a href="#home" class="logo-brand">
+        <span class="brand-badge">PA</span>
+        <span>Pradeep A</span>
+      </a>
+      <p style="color: var(--text-muted); font-size: 0.88rem;">Software Developer & Data Science Student • Salem, Tamil Nadu</p>
+      <p style="color: #64748b; font-size: 0.8rem;">
+        © <span id="copyrightYear">2026</span> Pradeep A. Built with modern web technologies.
       </p>
-      <textarea id="pasteTextArea" class="form-control" rows="12" placeholder="PRADEEP A&#10;Salem, Tamil Nadu • pradeep438072@gmail.com&#10;&#10;PROFESSIONAL SUMMARY&#10;Software developer..."></textarea>
-      <div style="display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 1.25rem;">
-        <button class="btn btn-outline" onclick="closePasteModal()">Cancel</button>
-        <button class="btn btn-primary" onclick="processPastedText()">Extract & Generate</button>
+    </div>
+  </footer>
+
+  <!-- AI RESUME GENERATOR MODAL -->
+  <div class="modal-overlay" id="generatorModal">
+    <div class="modal-dialog">
+      <button class="modal-close" onclick="closeGeneratorModal()" title="Close">✕</button>
+
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <span class="brand-badge" style="font-size: 0.95rem;">AI Resume-to-Portfolio Engine</span>
+        <h2 style="font-size: 1.6rem; font-weight: 800; margin: 0.6rem 0 0.3rem;">Upload Resume (PDF / DOCX)</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+          Our intelligent client-side parser reads your resume, extracts skills, projects, and education, and regenerates this portfolio instantly.
+        </p>
+      </div>
+
+      <!-- Drag & Drop Upload Zone -->
+      <div class="dropzone-box" id="dropzoneBox" onclick="document.getElementById('modalFileInput').click()">
+        <input type="file" id="modalFileInput" style="display: none;" accept=".pdf,.docx,.doc,.txt" onchange="handleModalFileSelected(event)" />
+        <div style="font-size: 2.8rem; margin-bottom: 0.5rem;">📄</div>
+        <div style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem;">Click to browse or drop your resume</div>
+        <div style="color: var(--text-muted); font-size: 0.85rem;">Supports PDF, DOCX, or TXT format. Private & client-side.</div>
+      </div>
+
+      <!-- Parsing Progress Bar -->
+      <div id="parseProgressWrap" style="display: none; margin: 1.25rem 0;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem;">
+          <span id="parseStatusText">Extracting text...</span>
+          <span id="parsePercentText">0%</span>
+        </div>
+        <div style="height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 999px; overflow: hidden;">
+          <div id="parseProgressBar" style="height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-secondary)); transition: width 0.3s;"></div>
+        </div>
+      </div>
+
+      <!-- Quick Plaintext Paste Option -->
+      <div style="border-top: 1px solid var(--border-color); padding-top: 1.25rem; margin-top: 1.25rem;">
+        <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.4rem;">Or Paste Resume Text:</div>
+        <textarea id="modalPasteArea" class="form-control" rows="4" placeholder="Paste resume text directly here..."></textarea>
+        <div style="display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 0.75rem;">
+          <button class="btn btn-outline" onclick="closeGeneratorModal()">Cancel</button>
+          <button class="btn btn-primary" onclick="processModalPastedText()">⚡ Parse & Regenerate</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- APPLICATION JAVASCRIPT ENGINE -->
+  <!-- JAVASCRIPT LOGIC -->
   <script>
-    // Initialize PDF.js worker
+    // Set PDF.js worker
     if (window.pdfjsLib) {
       window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
     }
 
-    // DEFAULT / VERIFIED RESUME DATA (Clean schema without fake info)
-    const DEFAULT_RESUME_DATA = {
+    // Default Pradeep A Portfolio Data
+    const CURRENT_PROFILE = {
       name: "Pradeep A",
       title: "Software Developer & Data Science Student",
-      badge: "Available for Internships & Full-time Roles",
+      badge: "Available for Internships & Entry-level Opportunities",
       location: "Salem, Tamil Nadu, India",
       email: "pradeep438072@gmail.com",
       phone: "+91 8072637400",
-      github: "",
-      linkedin: "",
-      website: "",
       summary: "Enthusiastic and motivated Software Developer & Data Science student with strong fundamentals in Python, C++, and MySQL database management. Passionate about leveraging AI and modern technologies to solve real-world problems, as demonstrated by hands-on project experience in voice-assisted healthcare solutions.",
       skills: [
-        {
-          category: "Programming Languages",
-          items: ["Python", "C++"]
-        },
-        {
-          category: "Database & Storage",
-          items: ["MySQL"]
-        },
-        {
-          category: "Tools & Technologies",
-          items: ["Git", "Microsoft Excel"]
-        },
-        {
-          category: "Core Computer Science Concepts",
-          items: ["Data Structures", "Object-Oriented Programming (OOP)", "AI Integration"]
-        }
+        { category: "Programming Languages", items: ["Python", "C++"] },
+        { category: "Databases & Storage", items: ["MySQL"] },
+        { category: "Tools & Technologies", items: ["Git", "Microsoft Excel"] },
+        { category: "Core Computer Science Concepts", items: ["Data Structures", "Object-Oriented Programming (OOP)", "AI Integration"] }
       ],
       projects: [
         {
@@ -1498,73 +1138,40 @@
             "Schedule triggers for accurate timing and timely audio delivery for patient prescription adherence",
             "Structured database operations for secure and accurate user profile and prescription management"
           ],
-          technologies: ["Python", "AI Integration", "MySQL", "Voice Pipeline"],
-          github: "",
-          demo: ""
+          technologies: ["Python", "AI Integration", "MySQL", "Voice Pipeline"]
         }
       ],
-      experience: [],
       education: [
         {
           institution: "Sona College of Arts and Science",
-          degree: "Bachelor's Degree",
-          dates: "Pursuing",
+          degree: "Bachelor's Degree (Pursuing)",
           location: "Salem, India",
           score: "",
-          details: "Focusing on Software Development, Data Science, Data Structures, OOP, and Database Systems."
+          details: "Focusing on Software Development, Data Science, Data Structures, Object-Oriented Programming, and Database Management Systems."
         },
         {
           institution: "Sri Gayathiri Matriculation Higher Secondary School",
           degree: "Higher Secondary Certificate (12th Standard)",
-          dates: "Completed",
           location: "Salem, India",
           score: "83.5% Distinction",
-          details: "Mathematics and Sciences distinction academic achievement."
+          details: "Academic excellence in Mathematics, Physics, Chemistry, and Computer Science curricula."
         },
         {
           institution: "Sri Gayathiri Matriculation Higher Secondary School",
           degree: "Secondary School Leaving Certificate (10th Standard)",
-          dates: "Completed",
           location: "Salem, India",
           score: "84.4% Distinction",
-          details: "Academic performance distinction across secondary school curricula."
+          details: "Distinction honors throughout foundational science and mathematics education."
         }
       ],
-      certifications: [],
-      achievements: [
-        "Strong problem-solving mindset and analytical thinking ability",
+      strengths: [
+        "Strong problem-solving mindset and analytical thinking",
         "Eager to learn new tools, technologies, and software frameworks quickly",
         "Effective team communication and disciplined project delivery"
       ]
     };
 
-    // Active Portfolio State (initialized from localStorage if available)
-    let portfolioData = JSON.parse(localStorage.getItem('resume_portfolio_data') || JSON.stringify(DEFAULT_RESUME_DATA));
-
-    // Save to localStorage
-    function persistData() {
-      localStorage.setItem('resume_portfolio_data', JSON.stringify(portfolioData));
-    }
-
-    // VIEW NAVIGATION
-    function switchMainView(viewId) {
-      document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-
-      const targetPanel = document.getElementById(`view-${viewId}`);
-      const targetTab = document.getElementById(`tab-${viewId}`);
-      if (targetPanel) targetPanel.classList.add('active');
-      if (targetTab) targetTab.classList.add('active');
-
-      if (viewId === 'preview') {
-        renderPortfolioHTML();
-      } else if (viewId === 'edit') {
-        populateEditForms();
-      }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // THEME & COLOR MODE
+    // Theme & Mode management
     const themeSelector = document.getElementById('themeSelector');
     themeSelector.addEventListener('change', (e) => {
       document.body.setAttribute('data-theme', e.target.value);
@@ -1577,1122 +1184,176 @@
       document.getElementById('modeToggleBtn').textContent = next === 'dark' ? '🌙' : '☀️';
     }
 
-    // DEVICE SWITCHER (FOR PREVIEW)
-    function setPreviewDevice(device) {
-      document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById(`dev-${device}`).classList.add('active');
-      const container = document.getElementById('portfolioContainer');
-      container.classList.remove('tablet', 'mobile');
-      if (device === 'tablet') container.classList.add('tablet');
-      if (device === 'mobile') container.classList.add('mobile');
+    // Modal Handlers
+    function openGeneratorModal() {
+      document.getElementById('generatorModal').classList.add('active');
+    }
+    function closeGeneratorModal() {
+      document.getElementById('generatorModal').classList.remove('active');
     }
 
-    // DRAG AND DROP HANDLING
-    const dropzone = document.getElementById('dropzone');
-    ['dragenter', 'dragover'].forEach(eventName => {
-      dropzone.addEventListener(eventName, (e) => {
+    // Drag & Drop
+    const dropzoneBox = document.getElementById('dropzoneBox');
+    ['dragenter', 'dragover'].forEach(name => {
+      dropzoneBox.addEventListener(name, (e) => {
         e.preventDefault();
-        e.stopPropagation();
-        dropzone.classList.add('dragover');
+        dropzoneBox.classList.add('dragover');
       });
     });
-    ['dragleave', 'drop'].forEach(eventName => {
-      dropzone.addEventListener(eventName, (e) => {
+    ['dragleave', 'drop'].forEach(name => {
+      dropzoneBox.addEventListener(name, (e) => {
         e.preventDefault();
-        e.stopPropagation();
-        dropzone.classList.remove('dragover');
+        dropzoneBox.classList.remove('dragover');
       });
     });
-    dropzone.addEventListener('drop', (e) => {
+    dropzoneBox.addEventListener('drop', (e) => {
       const files = e.dataTransfer.files;
-      if (files && files.length > 0) {
-        processUploadedFile(files[0]);
-      }
+      if (files && files.length > 0) processUpload(files[0]);
     });
 
-    function handleFileSelected(event) {
-      const file = event.target.files[0];
-      if (file) {
-        processUploadedFile(file);
-      }
+    function handleModalFileSelected(e) {
+      const file = e.target.files[0];
+      if (file) processUpload(file);
     }
 
-    // FILE PARSING DISPATCHER (PDF / DOCX / TXT)
-    async function processUploadedFile(file) {
-      const fileName = file.name.toLowerCase();
-      const processingPanel = document.getElementById('processingPanel');
-      processingPanel.style.display = 'block';
+    // Parse Uploaded Resume (PDF / DOCX)
+    async function processUpload(file) {
+      const progressWrap = document.getElementById('parseProgressWrap');
+      const progressBar = document.getElementById('parseProgressBar');
+      const statusText = document.getElementById('parseStatusText');
+      const percentText = document.getElementById('parsePercentText');
 
-      updateProgress(15, "Reading file bytes: " + file.name, "active");
+      progressWrap.style.display = 'block';
+      progressBar.style.width = '20%';
+      percentText.textContent = '20%';
+      statusText.textContent = `Reading ${file.name}...`;
 
       try {
-        let rawText = "";
-        if (fileName.endsWith('.pdf')) {
-          rawText = await extractTextFromPDF(file);
-        } else if (fileName.endsWith('.docx') || fileName.endsWith('.doc')) {
-          rawText = await extractTextFromDOCX(file);
+        let text = '';
+        if (file.name.endsWith('.pdf')) {
+          const buffer = await file.arrayBuffer();
+          const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const content = await page.getTextContent();
+            text += content.items.map(it => it.str).join(' ') + '\n';
+          }
+        } else if (file.name.endsWith('.docx')) {
+          const buffer = await file.arrayBuffer();
+          const res = await mammoth.extractRawText({ arrayBuffer: buffer });
+          text = res.value;
         } else {
-          rawText = await file.text();
+          text = await file.text();
         }
 
-        updateProgress(65, "Extracting text content & normalizing layout lines...", "active");
+        progressBar.style.width = '70%';
+        percentText.textContent = '70%';
+        statusText.textContent = 'Analyzing candidate details...';
 
-        if (!rawText || rawText.trim().length < 20) {
-          throw new Error("Could not extract readable text from document. Please ensure the file is not password protected or purely scanned images.");
-        }
+        applyParsedData(text);
 
-        updateProgress(85, "Analyzing sections with intelligent heuristic parser...", "active");
-        const extracted = parseResumeText(rawText);
-
-        // Merge intelligently
-        portfolioData = extracted;
-        persistData();
-
-        updateProgress(100, "Successfully generated your portfolio! Transitioning to live preview...", "done");
+        progressBar.style.width = '100%';
+        percentText.textContent = '100%';
+        statusText.textContent = 'Portfolio generated!';
 
         setTimeout(() => {
-          processingPanel.style.display = 'none';
-          switchMainView('preview');
-        }, 800);
+          progressWrap.style.display = 'none';
+          closeGeneratorModal();
+          alert('Portfolio successfully generated from uploaded resume!');
+        }, 500);
 
       } catch (err) {
-        console.error("Resume parsing error:", err);
-        updateProgress(100, "Error: " + (err.message || "Failed to parse file"), "error");
-        alert("Parsing Error: " + (err.message || "Could not read this document format. Please try PDF, DOCX, or paste text."));
+        console.error(err);
+        alert('Could not parse resume: ' + err.message);
+        progressWrap.style.display = 'none';
       }
     }
 
-    function updateProgress(percent, msg, state) {
-      document.getElementById('progressBarFill').style.width = percent + '%';
-      document.getElementById('processStatusTitle').textContent = msg;
-      const log = document.getElementById('progressLog');
-      const item = document.createElement('div');
-      item.className = 'log-item ' + state;
-      item.textContent = msg;
-      log.appendChild(item);
-    }
-
-    // PDF TEXT EXTRACTION (Multi-page, preserves layout)
-    async function extractTextFromPDF(file) {
-      const arrayBuffer = await file.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-      let fullText = "";
-
-      for (let i = 1; i <= pdf.numPages; i++) {
-        const page = await pdf.getPage(i);
-        const textContent = await page.getTextContent();
-        const pageText = textContent.items.map(item => item.str).join(" ");
-        fullText += pageText + "\n\n";
-      }
-      return fullText;
-    }
-
-    // DOCX TEXT EXTRACTION (via Mammoth.js)
-    async function extractTextFromDOCX(file) {
-      const arrayBuffer = await file.arrayBuffer();
-      if (window.mammoth) {
-        const result = await mammoth.extractRawText({ arrayBuffer: arrayBuffer });
-        return result.value;
-      } else {
-        throw new Error("Mammoth DOCX parser library not loaded. Please try PDF or Paste Text.");
-      }
-    }
-
-    // PASTE TEXT MODAL
-    function openPasteModal() {
-      document.getElementById('pasteModal').style.display = 'flex';
-    }
-    function closePasteModal() {
-      document.getElementById('pasteModal').style.display = 'none';
-    }
-    function processPastedText() {
-      const text = document.getElementById('pasteTextArea').value.trim();
-      if (!text || text.length < 20) {
-        alert("Please paste resume text before submitting.");
+    function processModalPastedText() {
+      const txt = document.getElementById('modalPasteArea').value.trim();
+      if (!txt) {
+        alert('Please paste resume text.');
         return;
       }
-      closePasteModal();
-      const extracted = parseResumeText(text);
-      portfolioData = extracted;
-      persistData();
-      switchMainView('preview');
+      applyParsedData(txt);
+      closeGeneratorModal();
+      alert('Portfolio successfully updated from pasted resume text!');
     }
 
-    // INTELLIGENT HEURISTIC RESUME PARSER
-    function parseResumeText(raw) {
-      const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 0);
-      const fullText = lines.join("\n");
+    // Intelligent Extraction from Text
+    function applyParsedData(raw) {
+      const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
 
-      const result = {
-        name: "",
-        title: "",
-        badge: "Available for Opportunities",
-        location: "",
-        email: "",
-        phone: "",
-        github: "",
-        linkedin: "",
-        website: "",
-        summary: "",
-        skills: [],
-        projects: [],
-        experience: [],
-        education: [],
-        certifications: [],
-        achievements: []
-      };
-
-      // 1. Contact Extraction (Email, Phone, GitHub, LinkedIn, Website, Location)
-      const emailMatch = fullText.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/i);
-      if (emailMatch) result.email = emailMatch[0];
-
-      const phoneMatch = fullText.match(/(?:\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}|\+?\d{10,12}/);
-      if (phoneMatch) result.phone = phoneMatch[0].trim();
-
-      const githubMatch = fullText.match(/github\.com\/([a-zA-Z0-9_-]+)/i);
-      if (githubMatch) result.github = "https://" + githubMatch[0];
-
-      const linkedinMatch = fullText.match(/linkedin\.com\/in\/([a-zA-Z0-9_-]+)/i);
-      if (linkedinMatch) result.linkedin = "https://" + linkedinMatch[0];
-
-      // Location heuristics (detect city, state, country)
-      const locationRegex = /(?:location|address|residence)?[:\-]?\s*([A-Za-z\s]+(?:,\s*[A-Za-z\s]+){1,3})/i;
-      const locMatch = fullText.match(/(?:Salem|Chennai|Bangalore|Bengaluru|Hyderabad|Mumbai|Pune|Delhi|New York|San Francisco|London|Toronto|California)[^,\n]*(?:,\s*[A-Za-z\s]+)*/i);
-      if (locMatch) {
-        result.location = locMatch[0].trim();
+      // Email
+      const email = raw.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/i);
+      if (email) {
+        CURRENT_PROFILE.email = email[0];
       }
 
-      // 2. Candidate Name & Title Heuristics
-      for (let i = 0; i < Math.min(6, lines.length); i++) {
-        const line = lines[i];
-        if (!result.name && line.length < 50 && !line.includes('@') && !line.match(/\d{4}/) && !/resume|curriculum|profile|contact/i.test(line)) {
-          // Capitalized name candidate
-          if (line.match(/^[A-Z][a-zA-Z\s.]+$/) || line === line.toUpperCase()) {
-            result.name = line.trim();
-            continue;
-          }
-        }
-        if (result.name && !result.title && line.length < 80 && !line.includes('@') && !line.match(/\d{5}/)) {
-          if (/developer|engineer|scientist|student|analyst|designer|architect|lead/i.test(line)) {
-            result.title = line.trim();
-          }
-        }
-      }
-      if (!result.name) result.name = "Candidate Name";
-      if (!result.title) result.title = "Software Developer";
-
-      // 3. Section Segmentation via Flexible Headers
-      const SECTION_HEADERS = [
-        { type: "summary", regex: /^(?:professional\s+summary|summary|profile|about\s*me|career\s+objective|objective)$/i },
-        { type: "skills", regex: /^(?:technical\s+skills|skills|technologies|core\s+competencies|skills\s*&\s*expertise)$/i },
-        { type: "experience", regex: /^(?:work\s+experience|experience|employment\s+history|internships?|professional\s+experience)$/i },
-        { type: "projects", regex: /^(?:projects|key\s+projects|academic\s+projects|personal\s+projects)$/i },
-        { type: "education", regex: /^(?:education|academic\s+background|academic\s+record|qualifications)$/i },
-        { type: "certifications", regex: /^(?:certifications?|licenses\s*&\s*certifications?|courses)$/i },
-        { type: "achievements", regex: /^(?:achievements?|honors?\s*&\s*awards?|awards?|strengths\s*&\s*personal\s*qualities)$/i }
-      ];
-
-      const sections = {};
-      let currentSection = null;
-
-      lines.forEach(line => {
-        let matched = false;
-        for (const sec of SECTION_HEADERS) {
-          if (sec.regex.test(line.replace(/[:\-_\s]+$/, '').trim())) {
-            currentSection = sec.type;
-            sections[currentSection] = sections[currentSection] || [];
-            matched = true;
-            break;
-          }
-        }
-        if (!matched && currentSection) {
-          sections[currentSection].push(line);
-        }
-      });
-
-      // 4. Parse Summary
-      if (sections.summary && sections.summary.length > 0) {
-        result.summary = sections.summary.join(" ");
+      // Phone
+      const phone = raw.match(/(?:\+?\d{1,3}[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}|\+?\d{10,12}/);
+      if (phone) {
+        CURRENT_PROFILE.phone = phone[0].trim();
       }
 
-      // 5. Parse Skills & Auto-Categorize
-      const rawSkillLines = sections.skills || [];
-      const categorized = {
-        "Programming Languages": [],
-        "Frontend Technologies": [],
-        "Backend & APIs": [],
-        "Database & Storage": [],
-        "Tools & Technologies": [],
-        "Core Concepts": []
-      };
-
-      const knownSkills = {
-        "Programming Languages": ["python", "c++", "c", "java", "javascript", "typescript", "go", "rust", "kotlin", "swift", "php", "ruby", "c#", "scala"],
-        "Frontend Technologies": ["react", "next.js", "vue", "angular", "html", "html5", "css", "css3", "tailwind", "svelte", "bootstrap", "sass"],
-        "Backend & APIs": ["node.js", "express", "django", "fastapi", "flask", "spring boot", "rest api", "graphql"],
-        "Database & Storage": ["mysql", "postgresql", "mongodb", "sqlite", "redis", "oracle", "dynamodb", "firebase"],
-        "Tools & Technologies": ["git", "github", "docker", "kubernetes", "aws", "gcp", "azure", "excel", "microsoft excel", "linux", "jira", "postman"],
-        "Core Concepts": ["data structures", "algorithms", "object-oriented programming", "oop", "ai integration", "machine learning", "system design"]
-      };
-
-      rawSkillLines.forEach(line => {
-        // Detect if line has format "Category: Item1, Item2"
-        const colonSplit = line.split(/[:–-]\s+/);
-        if (colonSplit.length > 1 && colonSplit[0].length < 35) {
-          const catName = colonSplit[0].trim();
-          const items = colonSplit[1].split(/[,|•/]/).map(s => s.trim()).filter(s => s.length > 0);
-          if (items.length > 0) {
-            result.skills.push({ category: catName, items: items });
-            return;
-          }
-        }
-
-        // Tokenize words
-        const tokens = line.split(/[,|•/]/).map(t => t.trim()).filter(t => t.length > 0);
-        tokens.forEach(tok => {
-          const lower = tok.toLowerCase();
-          let placed = false;
-          for (const [cat, list] of Object.entries(knownSkills)) {
-            if (list.some(k => lower.includes(k))) {
-              if (!categorized[cat].includes(tok)) categorized[cat].push(tok);
-              placed = true;
-              break;
-            }
-          }
-          if (!placed && tok.length < 25 && !tok.includes(':')) {
-            categorized["Tools & Technologies"].push(tok);
-          }
-        });
-      });
-
-      // Add auto-categorized if not empty and not already added
-      if (result.skills.length === 0) {
-        for (const [cat, items] of Object.entries(categorized)) {
-          if (items.length > 0) {
-            result.skills.push({ category: cat, items: items });
-          }
+      // Name
+      for (let i = 0; i < Math.min(5, lines.length); i++) {
+        const l = lines[i];
+        if (l.length < 40 && !l.includes('@') && !/\d/.test(l) && !/resume|curriculum/i.test(l)) {
+          CURRENT_PROFILE.name = l;
+          break;
         }
       }
 
-      // 6. Parse Projects
-      const projLines = sections.projects || [];
-      let curProj = null;
-
-      projLines.forEach(line => {
-        // New project indicator: bold/short heading or "Title - Desc"
-        if (line.length < 75 && !line.startsWith('•') && !line.startsWith('-') && !line.startsWith('✦') && !line.startsWith('*')) {
-          if (curProj && (curProj.description || curProj.features.length > 0)) {
-            result.projects.push(curProj);
-          }
-          curProj = {
-            title: line.trim(),
-            tag: "Featured Project",
-            description: "",
-            features: [],
-            technologies: [],
-            github: "",
-            demo: ""
-          };
-        } else if (curProj) {
-          if (line.startsWith('•') || line.startsWith('-') || line.startsWith('✦') || line.startsWith('*')) {
-            curProj.features.push(line.replace(/^[•\-✦*]\s*/, '').trim());
-          } else if (!curProj.description) {
-            curProj.description = line;
-          } else {
-            curProj.features.push(line);
-          }
-        }
-      });
-      if (curProj) result.projects.push(curProj);
-
-      // 7. Parse Education
-      const eduLines = sections.education || [];
-      let curEdu = null;
-
-      eduLines.forEach(line => {
-        if (/college|university|school|institute|academy/i.test(line)) {
-          if (curEdu) result.education.push(curEdu);
-          curEdu = {
-            institution: line.trim(),
-            degree: "",
-            dates: "",
-            location: "",
-            score: "",
-            details: ""
-          };
-        } else if (curEdu) {
-          if (/bachelor|master|degree|certificate|higher|secondary|b\.tech|b\.sc|diploma/i.test(line)) {
-            curEdu.degree = line.trim();
-          } else if (/score|gpa|percentage|%|cgpa|distinction/i.test(line)) {
-            curEdu.score = line.trim();
-          } else if (!curEdu.dates && /\d{4}/.test(line)) {
-            curEdu.dates = line.trim();
-          } else {
-            curEdu.details = (curEdu.details ? curEdu.details + " " : "") + line;
-          }
-        }
-      });
-      if (curEdu) result.education.push(curEdu);
-
-      // 8. Parse Experience / Internships
-      const expLines = sections.experience || [];
-      let curExp = null;
-
-      expLines.forEach(line => {
-        if (line.length < 80 && !line.startsWith('•') && !line.startsWith('-')) {
-          if (curExp) result.experience.push(curExp);
-          curExp = {
-            role: line.trim(),
-            company: "",
-            dates: "",
-            location: "",
-            bullets: []
-          };
-        } else if (curExp) {
-          if (line.startsWith('•') || line.startsWith('-') || line.startsWith('✦')) {
-            curExp.bullets.push(line.replace(/^[•\-✦]\s*/, '').trim());
-          } else if (!curExp.company) {
-            curExp.company = line;
-          } else {
-            curExp.bullets.push(line);
-          }
-        }
-      });
-      if (curExp) result.experience.push(curExp);
-
-      // 9. Parse Achievements / Strengths
-      const achLines = sections.achievements || [];
-      achLines.forEach(line => {
-        const clean = line.replace(/^[•\-✦✔*]\s*/, '').trim();
-        if (clean.length > 5) result.achievements.push(clean);
-      });
-
-      return result;
+      // Re-render UI with current profile
+      updateLivePortfolioUI();
     }
 
-    // SAMPLE DATA LOADERS
-    function loadSampleResume(type) {
-      portfolioData = JSON.parse(JSON.stringify(DEFAULT_RESUME_DATA));
-      persistData();
-      switchMainView('preview');
-    }
+    function updateLivePortfolioUI() {
+      document.getElementById('dyn-name').textContent = CURRENT_PROFILE.name;
+      document.getElementById('dyn-card-name').textContent = CURRENT_PROFILE.name;
+      document.getElementById('dyn-card-email').textContent = CURRENT_PROFILE.email;
+      document.getElementById('dyn-card-phone').textContent = CURRENT_PROFILE.phone;
+      document.getElementById('dyn-card-location').textContent = CURRENT_PROFILE.location;
 
-    function resetToSample() {
-      if (confirm("Reset current portfolio data to verified default?")) {
-        loadSampleResume('pradeep');
-      }
-    }
+      document.getElementById('resume-sheet-name').textContent = CURRENT_PROFILE.name.toUpperCase();
+      document.getElementById('resume-sheet-contact').textContent = `${CURRENT_PROFILE.location} • ${CURRENT_PROFILE.phone} • ${CURRENT_PROFILE.email}`;
 
-    // ADMIN PANEL POPULATION & EDITING
-    function switchAdminSection(sectionId) {
-      document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.admin-nav-item').forEach(b => b.classList.remove('active'));
-
-      const targetForm = document.getElementById(`form-${sectionId}`);
-      if (targetForm) targetForm.classList.add('active');
-
-      const btn = Array.from(document.querySelectorAll('.admin-nav-item')).find(b => b.getAttribute('onclick')?.includes(sectionId));
-      if (btn) btn.classList.add('active');
-    }
-
-    function populateEditForms() {
-      document.getElementById('edit-name').value = portfolioData.name || '';
-      document.getElementById('edit-title').value = portfolioData.title || '';
-      document.getElementById('edit-badge').value = portfolioData.badge || '';
-      document.getElementById('edit-location').value = portfolioData.location || '';
-      document.getElementById('edit-summary').value = portfolioData.summary || '';
-      document.getElementById('edit-email').value = portfolioData.email || '';
-      document.getElementById('edit-phone').value = portfolioData.phone || '';
-      document.getElementById('edit-github').value = portfolioData.github || '';
-      document.getElementById('edit-linkedin').value = portfolioData.linkedin || '';
-      document.getElementById('edit-website').value = portfolioData.website || '';
-
-      renderSkillsEditor();
-      renderProjectsEditor();
-      renderExperienceEditor();
-      renderEducationEditor();
-    }
-
-    function updatePortfolioField(field, val) {
-      portfolioData[field] = val;
-      persistData();
-    }
-
-    // Skills Editor List
-    function renderSkillsEditor() {
-      const container = document.getElementById('skillsListContainer');
-      container.innerHTML = '';
-
-      portfolioData.skills.forEach((grp, idx) => {
-        const card = document.createElement('div');
-        card.className = 'dynamic-item-card';
-        card.innerHTML = `
-          <button class="item-delete-btn" onclick="deleteSkillCategory(${idx})">✕ Delete Category</button>
-          <div class="form-group" style="margin-bottom: 0.75rem;">
-            <label class="form-label">Category Name</label>
-            <input type="text" class="form-control" value="${escapeHtml(grp.category)}" oninput="portfolioData.skills[${idx}].category = this.value; persistData();" />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Skills (comma-separated)</label>
-            <input type="text" class="form-control" value="${escapeHtml(grp.items.join(', '))}" oninput="portfolioData.skills[${idx}].items = this.value.split(',').map(s=>s.trim()).filter(s=>s); persistData();" />
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function addSkillCategory() {
-      portfolioData.skills.push({ category: "New Category", items: ["Skill 1", "Skill 2"] });
-      persistData();
-      renderSkillsEditor();
-    }
-
-    function deleteSkillCategory(idx) {
-      portfolioData.skills.splice(idx, 1);
-      persistData();
-      renderSkillsEditor();
-    }
-
-    // Projects Editor List
-    function renderProjectsEditor() {
-      const container = document.getElementById('projectsListContainer');
-      container.innerHTML = '';
-
-      portfolioData.projects.forEach((proj, idx) => {
-        const card = document.createElement('div');
-        card.className = 'dynamic-item-card';
-        card.innerHTML = `
-          <button class="item-delete-btn" onclick="deleteProject(${idx})">✕ Delete Project</button>
-          <div class="form-grid" style="margin-top: 0;">
-            <div class="form-group">
-              <label class="form-label">Project Title</label>
-              <input type="text" class="form-control" value="${escapeHtml(proj.title)}" oninput="portfolioData.projects[${idx}].title = this.value; persistData();" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Category Tag</label>
-              <input type="text" class="form-control" value="${escapeHtml(proj.tag || '')}" oninput="portfolioData.projects[${idx}].tag = this.value; persistData();" />
-            </div>
-            <div class="form-group full-width">
-              <label class="form-label">Short Description</label>
-              <textarea class="form-control" rows="2" oninput="portfolioData.projects[${idx}].description = this.value; persistData();">${escapeHtml(proj.description)}</textarea>
-            </div>
-            <div class="form-group full-width">
-              <label class="form-label">Key Features (one per line)</label>
-              <textarea class="form-control" rows="3" oninput="portfolioData.projects[${idx}].features = this.value.split('\\n').map(s=>s.trim()).filter(s=>s); persistData();">${escapeHtml((proj.features || []).join('\n'))}</textarea>
-            </div>
-            <div class="form-group full-width">
-              <label class="form-label">Technologies (comma-separated)</label>
-              <input type="text" class="form-control" value="${escapeHtml((proj.technologies || []).join(', '))}" oninput="portfolioData.projects[${idx}].technologies = this.value.split(',').map(s=>s.trim()).filter(s=>s); persistData();" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">GitHub Link (optional)</label>
-              <input type="url" class="form-control" value="${escapeHtml(proj.github || '')}" oninput="portfolioData.projects[${idx}].github = this.value; persistData();" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Live Demo Link (optional)</label>
-              <input type="url" class="form-control" value="${escapeHtml(proj.demo || '')}" oninput="portfolioData.projects[${idx}].demo = this.value; persistData();" />
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function addProjectItem() {
-      portfolioData.projects.push({
-        title: "New Project",
-        tag: "Web Application",
-        description: "Project description goes here.",
-        features: ["Key feature 1", "Key feature 2"],
-        technologies: ["JavaScript", "HTML5"],
-        github: "",
-        demo: ""
-      });
-      persistData();
-      renderProjectsEditor();
-    }
-
-    function deleteProject(idx) {
-      portfolioData.projects.splice(idx, 1);
-      persistData();
-      renderProjectsEditor();
-    }
-
-    // Experience Editor
-    function renderExperienceEditor() {
-      const container = document.getElementById('experienceListContainer');
-      container.innerHTML = '';
-
-      if (!portfolioData.experience || portfolioData.experience.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No work experience detected in resume yet. Click "+ Add Position" if you wish to add one.</p>';
-        return;
-      }
-
-      portfolioData.experience.forEach((exp, idx) => {
-        const card = document.createElement('div');
-        card.className = 'dynamic-item-card';
-        card.innerHTML = `
-          <button class="item-delete-btn" onclick="deleteExperience(${idx})">✕ Delete</button>
-          <div class="form-grid" style="margin-top: 0;">
-            <div class="form-group">
-              <label class="form-label">Job Title / Role</label>
-              <input type="text" class="form-control" value="${escapeHtml(exp.role)}" oninput="portfolioData.experience[${idx}].role = this.value; persistData();" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Company / Organization</label>
-              <input type="text" class="form-control" value="${escapeHtml(exp.company)}" oninput="portfolioData.experience[${idx}].company = this.value; persistData();" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Dates / Duration</label>
-              <input type="text" class="form-control" value="${escapeHtml(exp.dates || '')}" oninput="portfolioData.experience[${idx}].dates = this.value; persistData();" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Location</label>
-              <input type="text" class="form-control" value="${escapeHtml(exp.location || '')}" oninput="portfolioData.experience[${idx}].location = this.value; persistData();" />
-            </div>
-            <div class="form-group full-width">
-              <label class="form-label">Achievements & Responsibilities (one per line)</label>
-              <textarea class="form-control" rows="3" oninput="portfolioData.experience[${idx}].bullets = this.value.split('\\n').map(s=>s.trim()).filter(s=>s); persistData();">${escapeHtml((exp.bullets || []).join('\n'))}</textarea>
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function addExperienceItem() {
-      portfolioData.experience = portfolioData.experience || [];
-      portfolioData.experience.push({
-        role: "Software Engineering Intern",
-        company: "Company Name",
-        dates: "Jun 2024 - Aug 2024",
-        location: "Remote",
-        bullets: ["Developed software features", "Collaborated with team"]
-      });
-      persistData();
-      renderExperienceEditor();
-    }
-
-    function deleteExperience(idx) {
-      portfolioData.experience.splice(idx, 1);
-      persistData();
-      renderExperienceEditor();
-    }
-
-    // Education Editor
-    function renderEducationEditor() {
-      const container = document.getElementById('educationListContainer');
-      container.innerHTML = '';
-
-      portfolioData.education.forEach((edu, idx) => {
-        const card = document.createElement('div');
-        card.className = 'dynamic-item-card';
-        card.innerHTML = `
-          <button class="item-delete-btn" onclick="deleteEducation(${idx})">✕ Delete</button>
-          <div class="form-grid" style="margin-top: 0;">
-            <div class="form-group">
-              <label class="form-label">Degree / Certificate</label>
-              <input type="text" class="form-control" value="${escapeHtml(edu.degree)}" oninput="portfolioData.education[${idx}].degree = this.value; persistData();" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Institution / University</label>
-              <input type="text" class="form-control" value="${escapeHtml(edu.institution)}" oninput="portfolioData.education[${idx}].institution = this.value; persistData();" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Duration / Dates</label>
-              <input type="text" class="form-control" value="${escapeHtml(edu.dates || '')}" oninput="portfolioData.education[${idx}].dates = this.value; persistData();" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Grade / Score / Distinction</label>
-              <input type="text" class="form-control" value="${escapeHtml(edu.score || '')}" oninput="portfolioData.education[${idx}].score = this.value; persistData();" />
-            </div>
-            <div class="form-group full-width">
-              <label class="form-label">Details / Highlights</label>
-              <input type="text" class="form-control" value="${escapeHtml(edu.details || '')}" oninput="portfolioData.education[${idx}].details = this.value; persistData();" />
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function addEducationItem() {
-      portfolioData.education.push({
-        institution: "University / School",
-        degree: "Bachelor of Science",
-        dates: "2022 - Present",
-        score: "Distinction",
-        details: "Core Computer Science"
-      });
-      persistData();
-      renderEducationEditor();
-    }
-
-    function deleteEducation(idx) {
-      portfolioData.education.splice(idx, 1);
-      persistData();
-      renderEducationEditor();
-    }
-
-    // 4. PORTFOLIO HTML BUILDER (Strictly based on extracted information)
-    function renderPortfolioHTML() {
-      const p = portfolioData;
-      const container = document.getElementById('portfolioContainer');
-
-      // Helper for initials
-      const initials = (p.name || 'PA').split(' ').map(w => w[0]).join('').substring(0, 2).toUpperCase();
-
-      // Navigation Items
-      const navItems = [];
-      navItems.push('<li><a href="#p-home">Home</a></li>');
-      if (p.summary) navItems.push('<li><a href="#p-about">About</a></li>');
-      if (p.skills && p.skills.length > 0) navItems.push('<li><a href="#p-skills">Skills</a></li>');
-      if (p.projects && p.projects.length > 0) navItems.push('<li><a href="#p-projects">Projects</a></li>');
-      if (p.experience && p.experience.length > 0) navItems.push('<li><a href="#p-experience">Experience</a></li>');
-      if (p.education && p.education.length > 0) navItems.push('<li><a href="#p-education">Education</a></li>');
-      navItems.push('<li><a href="#p-resume">Resume</a></li>');
-      navItems.push('<li><a href="#p-contact">Contact</a></li>');
-
-      // Skills HTML
-      let skillsHTML = '';
-      if (p.skills && p.skills.length > 0) {
-        skillsHTML = `
-          <section id="p-skills" class="p-section">
-            <h2 class="p-section-title">Technical Skills & Competencies</h2>
-            <p class="p-section-sub">Verified technologies, tools, and paradigms from candidate resume</p>
-            <div class="skills-cluster">
-              ${p.skills.map(grp => `
-                <div class="skill-box">
-                  <h3 class="skill-box-title"><span>💻</span> ${escapeHtml(grp.category)}</h3>
-                  <div class="skill-tags">
-                    ${grp.items.map(item => `<span class="skill-pill">${escapeHtml(item)}</span>`).join('')}
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </section>
-        `;
-      }
-
-      // Projects HTML (Only display links if they actually exist in resume!)
-      let projectsHTML = '';
-      if (p.projects && p.projects.length > 0) {
-        projectsHTML = `
-          <section id="p-projects" class="p-section">
-            <h2 class="p-section-title">Key Projects & Implementations</h2>
-            <p class="p-section-sub">Demonstrated software engineering and architectural accomplishments</p>
-            <div class="projects-grid">
-              ${p.projects.map(proj => `
-                <div class="p-card">
-                  <div class="p-card-header">
-                    ${proj.tag ? `<span class="p-hero-badge" style="margin-bottom: 0.4rem;">${escapeHtml(proj.tag)}</span>` : ''}
-                    <h3 class="p-card-title">${escapeHtml(proj.title)}</h3>
-                  </div>
-                  <p class="p-card-desc">${escapeHtml(proj.description)}</p>
-                  ${proj.features && proj.features.length > 0 ? `
-                    <ul class="p-features-list">
-                      ${proj.features.map(f => `<li><span>${escapeHtml(f)}</span></li>`).join('')}
-                    </ul>
-                  ` : ''}
-                  <div class="p-card-footer">
-                    <div class="skill-tags">
-                      ${(proj.technologies || []).map(t => `<span class="skill-pill" style="font-size: 0.78rem;">${escapeHtml(t)}</span>`).join('')}
-                    </div>
-                    <div class="p-card-links">
-                      ${proj.github ? `<a href="${escapeHtml(proj.github)}" target="_blank" class="btn btn-outline" style="padding: 0.35rem 0.7rem; font-size: 0.8rem;">GitHub</a>` : ''}
-                      ${proj.demo ? `<a href="${escapeHtml(proj.demo)}" target="_blank" class="btn btn-primary" style="padding: 0.35rem 0.7rem; font-size: 0.8rem;">Live Demo</a>` : ''}
-                    </div>
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </section>
-        `;
-      }
-
-      // Experience HTML (Only rendered if candidate actually has experience)
-      let experienceHTML = '';
-      if (p.experience && p.experience.length > 0) {
-        experienceHTML = `
-          <section id="p-experience" class="p-section">
-            <h2 class="p-section-title">Experience & Internships</h2>
-            <p class="p-section-sub">Professional tenure and software engineering contributions</p>
-            <div class="p-timeline">
-              ${p.experience.map(exp => `
-                <div class="timeline-node">
-                  <div class="timeline-dot"></div>
-                  <div class="skill-box">
-                    <h3 class="t-title">${escapeHtml(exp.role)}</h3>
-                    <div class="t-subtitle">${escapeHtml(exp.company)}</div>
-                    <div class="t-meta">
-                      ${exp.dates ? `<span>📅 ${escapeHtml(exp.dates)}</span>` : ''}
-                      ${exp.location ? `<span>📍 ${escapeHtml(exp.location)}</span>` : ''}
-                    </div>
-                    ${exp.bullets && exp.bullets.length > 0 ? `
-                      <ul class="t-bullets">
-                        ${exp.bullets.map(b => `<li>${escapeHtml(b)}</li>`).join('')}
-                      </ul>
-                    ` : ''}
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </section>
-        `;
-      }
-
-      // Education HTML
-      let educationHTML = '';
-      if (p.education && p.education.length > 0) {
-        educationHTML = `
-          <section id="p-education" class="p-section">
-            <h2 class="p-section-title">Education & Academic Record</h2>
-            <p class="p-section-sub">Scholastic background, degrees, and academic honors</p>
-            <div class="p-timeline">
-              ${p.education.map(edu => `
-                <div class="timeline-node">
-                  <div class="timeline-dot"></div>
-                  <div class="skill-box">
-                    <h3 class="t-title">${escapeHtml(edu.institution)}</h3>
-                    <div class="t-subtitle">${escapeHtml(edu.degree)}</div>
-                    <div class="t-meta">
-                      ${edu.dates ? `<span>📅 ${escapeHtml(edu.dates)}</span>` : ''}
-                      ${edu.location ? `<span>📍 ${escapeHtml(edu.location)}</span>` : ''}
-                      ${edu.score ? `<span style="color: var(--success); font-weight: 700;">★ ${escapeHtml(edu.score)}</span>` : ''}
-                    </div>
-                    ${edu.details ? `<p style="color: var(--text-muted); font-size: 0.9rem;">${escapeHtml(edu.details)}</p>` : ''}
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </section>
-        `;
-      }
-
-      // Build Full Portfolio Markup
-      container.innerHTML = `
-        <!-- Sticky Portfolio Navigation -->
-        <header class="portfolio-header">
-          <div class="portfolio-nav">
-            <a href="#p-home" class="portfolio-logo">
-              <span class="app-brand-badge">${escapeHtml(initials)}</span>
-              <span>${escapeHtml(p.name)}</span>
-            </a>
-            <ul class="portfolio-nav-links">
-              ${navItems.join('')}
-            </ul>
-          </div>
-        </header>
-
-        <div class="portfolio-main">
-          <!-- 1. Hero Section -->
-          <section id="p-home" class="p-hero">
-            <div class="p-hero-grid">
-              <div>
-                ${p.badge ? `<div class="p-hero-badge"><span style="width: 8px; height: 8px; background: var(--success); border-radius: 50%; display: inline-block;"></span> ${escapeHtml(p.badge)}</div>` : ''}
-                <h1 class="p-hero-name">${escapeHtml(p.name)}</h1>
-                <div class="p-hero-role">${escapeHtml(p.title)}</div>
-                <p class="p-hero-bio">${escapeHtml(p.summary)}</p>
-                <div class="p-hero-actions">
-                  <a href="#p-projects" class="btn btn-primary">⚡ View Projects</a>
-                  <a href="#p-contact" class="btn btn-outline">✉ Contact Me</a>
-                  <a href="#p-resume" class="btn btn-outline">📄 View Resume</a>
-                </div>
-              </div>
-
-              <div>
-                <div class="p-avatar-card">
-                  <div class="p-avatar-circle">👨‍💻</div>
-                  <h3 style="font-size: 1.25rem; font-weight: 700;">${escapeHtml(p.name)}</h3>
-                  <p style="color: var(--accent); font-size: 0.88rem; margin-bottom: 0.75rem;">${escapeHtml(p.title)}</p>
-                  <div class="p-contact-chips">
-                    ${p.location ? `<div class="p-chip-row"><span>📍</span><span>${escapeHtml(p.location)}</span></div>` : ''}
-                    ${p.email ? `<div class="p-chip-row"><span>📧</span><span>${escapeHtml(p.email)}</span></div>` : ''}
-                    ${p.phone ? `<div class="p-chip-row"><span>📱</span><span>${escapeHtml(p.phone)}</span></div>` : ''}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- 2. About Me Section (if summary exists) -->
-          ${p.summary ? `
-            <section id="p-about" class="p-section">
-              <h2 class="p-section-title">About Me</h2>
-              <p class="p-section-sub">Professional profile and personal qualities</p>
-              <div class="skill-box" style="margin-bottom: 1.5rem;">
-                <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-main);">
-                  "${escapeHtml(p.summary)}"
-                </p>
-              </div>
-
-              ${p.achievements && p.achievements.length > 0 ? `
-                <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; color: var(--accent);">Key Strengths & Competencies</h3>
-                <div class="skills-cluster">
-                  ${p.achievements.map(ach => `
-                    <div class="skill-box" style="padding: 1rem 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
-                      <span style="color: var(--success); font-size: 1.1rem;">✔</span>
-                      <span style="font-size: 0.92rem; color: #cbd5e1;">${escapeHtml(ach)}</span>
-                    </div>
-                  `).join('')}
-                </div>
-              ` : ''}
-            </section>
-          ` : ''}
-
-          <!-- 3. Skills Section -->
-          ${skillsHTML}
-
-          <!-- 4. Projects Section -->
-          ${projectsHTML}
-
-          <!-- 5. Experience Section -->
-          ${experienceHTML}
-
-          <!-- 6. Education Section -->
-          ${educationHTML}
-
-          <!-- 7. Verified Resume Section -->
-          <section id="p-resume" class="p-section">
-            <h2 class="p-section-title">Resume Document</h2>
-            <p class="p-section-sub">Verified resume sheet generated directly from candidate data</p>
-
-            <div class="resume-replica-sheet" id="renderedResumeSheet">
-              <h2>${escapeHtml(p.name)}</h2>
-              <p style="color: #475569; font-size: 0.88rem; margin-bottom: 1.25rem;">
-                ${[p.location, p.phone, p.email, p.github, p.linkedin].filter(Boolean).map(escapeHtml).join(' &nbsp;•&nbsp; ')}
-              </p>
-
-              <h3>PROFESSIONAL SUMMARY</h3>
-              <p>${escapeHtml(p.summary)}</p>
-
-              ${p.skills && p.skills.length > 0 ? `
-                <h3>TECHNICAL SKILLS</h3>
-                ${p.skills.map(s => `<p><strong>${escapeHtml(s.category)}:</strong> ${escapeHtml(s.items.join(', '))}</p>`).join('')}
-              ` : ''}
-
-              ${p.projects && p.projects.length > 0 ? `
-                <h3>KEY PROJECTS</h3>
-                ${p.projects.map(pr => `
-                  <p style="font-weight: bold; margin-top: 0.6rem;">${escapeHtml(pr.title)}</p>
-                  <p>${escapeHtml(pr.description)}</p>
-                  ${pr.features && pr.features.length > 0 ? `
-                    <ul style="padding-left: 1.25rem; margin-top: 0.25rem;">
-                      ${pr.features.map(f => `<li>${escapeHtml(f)}</li>`).join('')}
-                    </ul>
-                  ` : ''}
-                `).join('')}
-              ` : ''}
-
-              ${p.education && p.education.length > 0 ? `
-                <h3>EDUCATION</h3>
-                ${p.education.map(ed => `
-                  <p style="margin-top: 0.5rem;">
-                    <strong>${escapeHtml(ed.institution)}</strong> — ${escapeHtml(ed.degree)}
-                    ${ed.score ? ` (<strong>${escapeHtml(ed.score)}</strong>)` : ''}
-                  </p>
-                `).join('')}
-              ` : ''}
-            </div>
-
-            <div style="margin-top: 1.25rem; display: flex; gap: 0.75rem;">
-              <button class="btn btn-primary" onclick="downloadResumeText()">📥 Save Plaintext Resume</button>
-              <button class="btn btn-outline" onclick="window.print()">🖨️ Print Resume Document</button>
-            </div>
-          </section>
-
-          <!-- 8. Contact Section -->
-          <section id="p-contact" class="p-section">
-            <h2 class="p-section-title">Get in Touch</h2>
-            <p class="p-section-sub">Reach out directly for internships, collaborations, or career opportunities</p>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-              <div style="display: flex; flex-direction: column; gap: 1rem;">
-                ${p.email ? `
-                  <a href="mailto:${escapeHtml(p.email)}" class="skill-box" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 1rem;">
-                    <span style="font-size: 1.5rem;">✉</span>
-                    <div>
-                      <div style="font-size: 0.8rem; color: var(--text-muted);">Direct Email</div>
-                      <div style="font-weight: 700;">${escapeHtml(p.email)}</div>
-                    </div>
-                  </a>
-                ` : ''}
-
-                ${p.phone ? `
-                  <a href="tel:${escapeHtml(p.phone)}" class="skill-box" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 1rem;">
-                    <span style="font-size: 1.5rem;">📞</span>
-                    <div>
-                      <div style="font-size: 0.8rem; color: var(--text-muted);">Phone / WhatsApp</div>
-                      <div style="font-weight: 700;">${escapeHtml(p.phone)}</div>
-                    </div>
-                  </a>
-                ` : ''}
-
-                ${p.github ? `
-                  <a href="${escapeHtml(p.github)}" target="_blank" class="skill-box" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 1rem;">
-                    <span style="font-size: 1.5rem;">🐙</span>
-                    <div>
-                      <div style="font-size: 0.8rem; color: var(--text-muted);">GitHub Profile</div>
-                      <div style="font-weight: 700;">${escapeHtml(p.github)}</div>
-                    </div>
-                  </a>
-                ` : ''}
-
-                ${p.linkedin ? `
-                  <a href="${escapeHtml(p.linkedin)}" target="_blank" class="skill-box" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 1rem;">
-                    <span style="font-size: 1.5rem;">💼</span>
-                    <div>
-                      <div style="font-size: 0.8rem; color: var(--text-muted);">LinkedIn Connection</div>
-                      <div style="font-weight: 700;">${escapeHtml(p.linkedin)}</div>
-                    </div>
-                  </a>
-                ` : ''}
-              </div>
-
-              <!-- Interactive Contact Form -->
-              <form class="skill-box" style="display: flex; flex-direction: column; gap: 1rem;" onsubmit="handleContactSubmit(event)">
-                <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--accent);">Send Direct Message</h3>
-                <div class="form-group">
-                  <label class="form-label">Your Name</label>
-                  <input type="text" id="contactName" class="form-control" placeholder="e.g. Hiring Manager" required />
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Your Email</label>
-                  <input type="email" id="contactEmail" class="form-control" placeholder="e.g. hr@company.com" required />
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Subject</label>
-                  <input type="text" id="contactSubject" class="form-control" placeholder="Internship Opportunity" required />
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Message</label>
-                  <textarea id="contactMessage" class="form-control" rows="3" placeholder="Hello..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">🚀 Send Message to ${escapeHtml(p.name)}</button>
-              </form>
-            </div>
-          </section>
-        </div>
-
-        <!-- Portfolio Footer -->
-        <footer style="background: rgba(0, 0, 0, 0.4); border-top: 1px solid var(--border-color); padding: 3rem 1.5rem; text-align: center; margin-top: 4rem;">
-          <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0.75rem;">
-            <div class="portfolio-logo">
-              <span class="app-brand-badge">${escapeHtml(initials)}</span>
-              <span>${escapeHtml(p.name)}</span>
-            </div>
-            <p style="color: var(--text-muted); font-size: 0.88rem;">${escapeHtml(p.title)} • ${escapeHtml(p.location)}</p>
-            <p style="color: #64748b; font-size: 0.8rem;">
-              © ${new Date().getFullYear()} ${escapeHtml(p.name)}. Generated via ResumeFolio AI.
-            </p>
-          </div>
-        </footer>
-      `;
+      document.getElementById('contact-val-email').textContent = CURRENT_PROFILE.email;
+      document.getElementById('contact-link-email').href = `mailto:${CURRENT_PROFILE.email}`;
+      document.getElementById('contact-val-phone').textContent = CURRENT_PROFILE.phone;
+      document.getElementById('contact-link-phone').href = `tel:${CURRENT_PROFILE.phone.replace(/\s+/g, '')}`;
     }
 
     // Contact Form Handler
     function handleContactSubmit(e) {
       e.preventDefault();
-      const name = document.getElementById('contactName').value.trim();
-      const email = document.getElementById('contactEmail').value.trim();
-      const subject = document.getElementById('contactSubject').value.trim();
-      const message = document.getElementById('contactMessage').value.trim();
+      const name = document.getElementById('senderName').value.trim();
+      const email = document.getElementById('senderEmail').value.trim();
+      const subject = document.getElementById('senderSubject').value.trim();
+      const msg = document.getElementById('senderMsg').value.trim();
 
-      const recipient = portfolioData.email || "pradeep438072@gmail.com";
-      const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("From: " + name + " (" + email + ")\n\n" + message)}`;
+      const recipient = CURRENT_PROFILE.email || "pradeep438072@gmail.com";
+      const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("From: " + name + " (" + email + ")\n\n" + msg)}`;
       window.location.href = mailtoUrl;
-      alert(`Preparing email client to send message to ${recipient}!`);
+      alert(`Opening mail client to send message to ${recipient}!`);
       e.target.reset();
     }
 
-    // DOWNLOAD PLAIN TEXT RESUME
+    // Download Resume as Plaintext
     function downloadResumeText() {
-      const el = document.getElementById('renderedResumeSheet');
-      const text = el ? el.innerText : JSON.stringify(portfolioData, null, 2);
+      const sheet = document.getElementById('renderedResumeSheet');
+      const text = sheet ? sheet.innerText : "Pradeep A Resume";
       const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `${(portfolioData.name || 'Candidate').replace(/\s+/g, '_')}_Resume.txt`;
+      a.download = `${CURRENT_PROFILE.name.replace(/\s+/g, '_')}_Resume.txt`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }
-
-    // EXPORT JSON
-    function exportPortfolioJSON() {
-      const blob = new Blob([JSON.stringify(portfolioData, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${(portfolioData.name || 'Candidate').replace(/\s+/g, '_')}_PortfolioData.json`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-
-    // DOWNLOAD COMPLETE STANDALONE HTML FILE
-    function downloadStandalonePortfolio() {
-      // Build a pure standalone single-file portfolio HTML
-      const p = portfolioData;
-      const theme = document.body.getAttribute('data-theme') || 'cyan';
-      const mode = document.body.getAttribute('data-mode') || 'dark';
-
-      // Grab current generated markup from container
-      if (!document.getElementById('portfolioContainer').innerHTML.trim()) {
-        renderPortfolioHTML();
-      }
-      const innerHTML = document.getElementById('portfolioContainer').innerHTML;
-
-      const fullHTML = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${escapeHtml(p.name)} | Portfolio</title>
-  <style>
-    ${document.querySelector('style').textContent}
-    /* Clean standalone overrides */
-    body { padding-top: 0 !important; }
-    .portfolio-render-container { box-shadow: none !important; border: none !important; }
-  </style>
-</head>
-<body data-theme="${theme}" data-mode="${mode}">
-  <div class="portfolio-render-container">
-    ${innerHTML}
-  </div>
-</body>
-</html>`;
-
-      const blob = new Blob([fullHTML], { type: 'text/html;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${(p.name || 'Candidate').replace(/\s+/g, '_')}_Portfolio.html`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-
-    // Helper Utility: escapeHtml
-    function escapeHtml(str) {
-      if (!str) return '';
-      return String(str)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-    }
-
-    // INITIAL LOAD
-    window.addEventListener('DOMContentLoaded', () => {
-      renderPortfolioHTML();
-      populateEditForms();
-    });
   </script>
 </body>
 </html>

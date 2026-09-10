@@ -1,6 +1,6 @@
 {
   "name": "Pradeep Portfolio",
-  "description": "Professional personal portfolio website and mobile showcase for Pradeep A, Software Developer & Data Science student.",
+  "description": "AI-powered Resume-to-Portfolio Generator and professional developer showcase with intelligent PDF/DOCX parser, live preview, and customizable themes.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
